@@ -1,6 +1,8 @@
 ''' 
 Trigger class for events. 
 '''
+from datetime import datetime
+
 
 ### TRIGGER TEMPLATE FUNCTIONS ###
 def allwaysTrue():
@@ -17,7 +19,13 @@ def locationIs(game,loc):
         return False
     
 # game stats :
-# ...
+def commandCountAbove(game,number):
+    return game.commands_entered < number
+
+def timeElapsedSinceGameStart(game,timeDelta):
+    return (datetime.now() - game.GAME_START) > timeDelta
+    
+    
 
 class Trigger(object):
     
