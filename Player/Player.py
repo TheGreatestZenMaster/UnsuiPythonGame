@@ -57,4 +57,7 @@ class Player(object):
               (self.health, self.armour, self.attack, self.level, self.xp)    
 
     def player_location(self):
-        print "You are in %r" % self.current_location
+        print "You are in %s" % self.current_location.name
+
+    def move_room(self, destination_room):
+        self.current_location = destination_room

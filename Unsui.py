@@ -46,8 +46,9 @@ list_of_actions_available_true_main = ["enter", "exit", "stats", "location", "he
 def opening_setup(game):
     """This opening setup gives us a player name and also provides the opening text"""
     name = raw_input("Whats your name?")
+    room_hallway = Room("Hallway")
     game.player.name = name
-    game.player.current_location = "Hallway"
+    game.player.current_location = room_hallway
     generate_rooms_dict()
     generate_keys_dict()
     game.player.player_location()
@@ -71,7 +72,7 @@ def generate_rooms_dict():
 def generate_doors_dict():
     room_dict = generate_rooms_dict()
     dict_of_doors_in_room = {}
-    if game.player.current_location == "Hallway":
+    if game.player.current_location.name == "Hallway":
         for door in game.doors:
             dict_of_doors_in_room[door] = door.name
         return dict_of_doors_in_room
@@ -252,6 +253,8 @@ def game_engine():
 #------ Main Loops ---------- #
 def hall_room_transition():
     room_choice = raw_input("Which room would you like to enter?(please enter a number)")
+    if not room_choice.isdigit():
+        print "Nope, it's not a number you entered."
     dict_of_doors = generate_doors_dict()
     room_dict = generate_rooms_dict()
     for i in dict_of_doors:
@@ -283,15 +286,15 @@ def hall_room_transition():
                 print "You entered the room!"
                 for room in room_dict:
                     if room.number == door_number:
-                        player.current_location = room.name
-
+                        game.player.move_room(room)
 
 def action_main():
     """This main function is the secondary loop that is operational while the player is in the room
     """
     while True:
-        if game.player.current_location == "Hallway":
+        if game.player.current_location.name == "Hallway":
             hall_room_transition()
+            break
         else:
             generate_room_keys_dict()
             game_engine()
@@ -305,9 +308,8 @@ def upper_main(game,input=raw_input):
     """
     opening_setup(game)
     while True:
-        input("Press <Enter> to continue!")
-        print "Your available actions while in the hallway are %s" % list_of_actions_available_true_main
-        game.player.current_location = "Hallway"
+        #input("Press <Enter> to continue!")
+        print "Your available actions while in the %s are %s" % (game.player.current_location.name, list_of_actions_available_true_main)
         take_action_main = raw_input("What do you want to do?")
         if take_action_main == "enter":
             action_main()

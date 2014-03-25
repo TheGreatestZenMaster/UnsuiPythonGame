@@ -7,7 +7,7 @@ import sys
 
 
 class Room(object):
-    def __init__(self, number, name, victory):
+    def __init__(self, name, number=0, victory=None):
         self.self = self
         self.number = number
         self.name = name
