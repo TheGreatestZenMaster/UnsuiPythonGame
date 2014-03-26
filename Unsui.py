@@ -42,7 +42,7 @@ game = Game_Instance()
         
 # Available actions for the loops
 list_of_actions_available_room = ["grab", "leave", "stats", "location", "keys", "help"]
-list_of_actions_available_true_main = ["enter", "exit", "stats", "location", "help"]
+list_of_actions_available_true_main = ["enter", "look", "exit", "stats", "location", "help"]
 
 
 #----- Opening Setup------#
@@ -326,6 +326,8 @@ def upper_main(game,input=raw_input):
             user_input.help_info()
         elif take_action_main == "location":
             game.player.player_location()
+        elif take_action_main == "look":
+            print game.player.current_location.description
         else:
             print "That's not a valid command!"
 
