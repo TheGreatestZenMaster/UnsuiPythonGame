@@ -9,11 +9,11 @@ from rooms.Hall import Hall
 from Player.Player import Player
 from monsters.Wolf import Wolf
 import user_input
+from config import UnsuiConfigLoader
 
 #----- = ------#
 class Game_Instance(object):
     def __init__(self):
-        self.hallway = Hall("Hallway")
 
         self.keys = [Key("Key", "Room 1", 10001),
                         Key("Key", "Room 2", 20002),
@@ -35,6 +35,9 @@ class Game_Instance(object):
 
         self.player = Player("NoName", "Male", "Human", None)
 
+        self.config_loader = UnsuiConfigLoader()
+        self.config_loader.generate()
+
 game = Game_Instance()
         
 # Available actions for the loops
@@ -46,11 +49,9 @@ list_of_actions_available_true_main = ["enter", "exit", "stats", "location", "he
 def opening_setup(game):
     """This opening setup gives us a player name and also provides the opening text"""
     name = raw_input("Whats your name?")
-    room_hallway = Room("Hallway")
+    room_hallway = game.config_loader.get_by_type_and_name('room', 'Hallway')
     game.player.name = name
     game.player.current_location = room_hallway
-    generate_rooms_dict()
-    generate_keys_dict()
     game.player.player_location()
     # The opening text to give a little story(will change later once we have some actual story)
     opening_text = "Hello and welcome to your adventure %r!\n" \
@@ -61,15 +62,13 @@ def opening_setup(game):
 
 #------- Room Populating function ----#
 def generate_rooms_dict():
-    room_dict = {}
-    for room in game.rooms:
-        room_dict[room] = room.name
-    return room_dict
+    return game.config_loader.get_by_type('room')
 
 
 def generate_doors_dict():
     room_dict = generate_rooms_dict()
     dict_of_doors_in_room = {}
+    return game.player.current_location.exits
     if game.player.current_location.name == "Hallway":
         for door in game.doors:
             dict_of_doors_in_room[door] = door.name
@@ -250,9 +249,16 @@ def game_engine():
 
 #------ Main Loops ---------- #
 def hall_room_transition():
+
+    print game.player.current_location.exits
     room_choice = raw_input("Which room would you like to enter?(please enter a number)")
     if not room_choice.isdigit():
         print "Nope, it's not a number you entered."
+
+    game.player.move_room(game.config_loader.get_by_type_and_name('room', game.player.current_location.exits[int(room_choice)-1]))
+
+    # Locked doors are to be reimplemented soon. For now I'm testing the configuration loader functionality
+    """
     dict_of_doors = generate_doors_dict()
     room_dict = generate_rooms_dict()
     for i in dict_of_doors:
@@ -285,6 +291,7 @@ def hall_room_transition():
                 for room in room_dict:
                     if room.number == door_number:
                         game.player.move_room(room)
+    """
 
 def action_main():
     """This main function is the secondary loop that is operational while the player is in the room
@@ -306,7 +313,6 @@ def upper_main(game,input=raw_input):
     """
     opening_setup(game)
     while True:
-        #input("Press <Enter> to continue!")
         print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
                                                                 list_of_actions_available_true_main)
         take_action_main = raw_input("What do you want to do?")

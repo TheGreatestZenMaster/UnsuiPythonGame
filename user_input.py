@@ -1,4 +1,3 @@
-
 default_input = raw_input
 
 def choose_object(item_list, input=default_input):
@@ -28,7 +27,7 @@ def help_info():
                       "help": "show this menu"
                       }
     while True:
-        info_choice = raw_input("What would you like to know more about?").lower()
+        info_choice = raw_input("What would you like to know more about? ('back' returns you to the prompt)").lower()
         try:
             print help_info_dict[info_choice]
         except KeyError:
