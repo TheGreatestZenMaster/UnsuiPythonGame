@@ -1,4 +1,3 @@
-
 from Inventory import Inventory
 
 max_level = 100
@@ -48,7 +47,7 @@ class Player(object):
         monster.health -= (self.attack - monster.armour)
         if monster.health <= 0:
             print "You beat the monster!"
-            player.xp += monster.xp
+            self.xp += monster.xp
             prompt_levelup()
             return False
         
