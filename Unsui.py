@@ -54,9 +54,7 @@ def opening_setup(game):
     game.player.player_location()
     # The opening text to give a little story(will change later once we have some actual story)
     opening_text = "Hello and welcome to your adventure %r!\n" \
-                   "You must have had one heck of a night last night" \
-                   " because you don't know where you are or how you got here!\n" \
-                   "Never fear, I'm sure you can figure it out!" % game.player.name
+                   "Its a bright new day! Lets get to it!" % game.player.name
     print opening_text
     game.player.level_up() 
 
@@ -309,7 +307,8 @@ def upper_main(game,input=raw_input):
     opening_setup(game)
     while True:
         #input("Press <Enter> to continue!")
-        print "Your available actions while in the %s are %s" % (game.player.current_location.name, list_of_actions_available_true_main)
+        print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
+                                                                list_of_actions_available_true_main)
         take_action_main = raw_input("What do you want to do?")
         if take_action_main == "enter":
             action_main()
