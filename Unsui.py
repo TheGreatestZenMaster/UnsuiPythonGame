@@ -263,7 +263,7 @@ def upper_main(game,input=raw_input):
     This loop should never exit.
     Exception: if the player specifies to exit
     """
-    user_input.opening_setup(game)
+    user_input.opening_setup(game,input)
     while True:
         print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
                                                                 list_of_actions_available_true_main)

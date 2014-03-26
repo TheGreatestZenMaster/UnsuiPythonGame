@@ -2,8 +2,19 @@ from user_input import choose_object, opening_setup
 from GameInstance import GameInstance
 
 import unittest
+import string
+import random
 
 from items.Key import Key
+
+def randomString(prompt='', size=6, chars=string.printable):
+    '''
+    Returns a randomly generated string of given size using specified given charset.
+    NOTE: string.printable = string.letters + string.digits + string.whitespace + string.punctuation
+    '''
+    return ''.join(random.choice(chars) for _ in range(size))
+
+    
 
 class basic_UI_tests(unittest.TestCase):
 
@@ -11,8 +22,9 @@ class basic_UI_tests(unittest.TestCase):
         '''
         runs through basic setup with random values
         '''
+        
         game = GameInstance()
-
+        opening_setup(game,input=randomString)
         
         # raise NotImplementedError()
     

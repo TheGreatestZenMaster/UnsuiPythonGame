@@ -1,4 +1,4 @@
-from monsters.Monster import Monster
+from Monster import Monster
 
 class Wolf(Monster):
     def __init__(self, name, room):
