@@ -1,4 +1,6 @@
 from user_input import choose_object
+from opening_setup import opening_setup
+
 import unittest
 
 from items.Key import Key
@@ -9,7 +11,7 @@ class basic_UI_tests(unittest.TestCase):
         '''
         runs through basic setup with random values
         '''
-        print 'yeah... i need to do this... later... =)'
+        
         # raise NotImplementedError()
     
     def grab_object_test(self):

@@ -10,6 +10,19 @@ def choose_object(item_list, input=default_input):
     else:
         print "can't find it!"
         return None
+        
+def opening_setup(game,input=raw_input):
+    """This opening setup gives us a player name and also provides the opening text"""
+    name = input("Whats your name?")
+    room_hallway = game.config_loader.get_by_type_and_name('room', 'Hallway')
+    game.player.name = name
+    game.player.current_location = room_hallway
+    game.player.player_location()
+    # The opening text to give a little story(will change later once we have some actual story)
+    opening_text = "Hello and welcome to your adventure %r!\n" \
+                   "Its a bright new day! Lets get to it!" % game.player.name
+    print opening_text
+    game.player.level_up() 
 
         
 #------Help function ------#
