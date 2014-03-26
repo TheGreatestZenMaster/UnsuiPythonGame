@@ -147,21 +147,6 @@ def opponent_engine():
     return False
 
 
-def game_engine():
-    """
-    Game_engine is should maybe be called room_engine
-    as its only function is to act as a go between for the main loop
-    """
-    generate_doors_dict()
-    visible_keys()
-    while True:
-        print "Your available actions while in the room are %s" % list_of_actions_available_room
-        action = raw_input("What do you want to do?")
-        result = take_action(action)
-        if not result:
-            return False
-
-
 #------ Main Loops ---------- #
 def hall_room_transition():
 
