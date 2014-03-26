@@ -22,11 +22,9 @@ class basic_UI_tests(unittest.TestCase):
         '''
         runs through basic setup with random values
         '''
-        
         game = GameInstance()
         opening_setup(game,input=randomString)
         
-        # raise NotImplementedError()
     
     def grab_object_test(self):
         testItem = Key("key1", "Room 1", 10001)

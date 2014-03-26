@@ -67,42 +67,6 @@ def populate_room_monster_dict():
             dict_of_room_monsters[monster] = monster.name
     return dict_of_room_monsters
 
-
-# ------- Status Functions ------#
-# These functions are there to display the info about the room/player on request
-def visible_keys():
-    dict_of_room_keys = generate_keys_dict()
-    count = 0
-    for key in dict_of_room_keys:
-        if key.room == player.current_location:
-            count += 1
-    if count == 0:
-        print "There are no keys"
-    else:
-        print "You can see %r keys." % count
-
-
-def visible_doors():
-    if player.current_location == "Hallway":
-        count = len(list_of_doors)
-        print "You can see %r doors numbered accordingly." % count
-    else:
-        print "You can see the door you came through"
-
-
-def door_status(door):
-        if door.locked:
-            print "Door number %r is locked!" % door.number
-        elif not door.locked:
-            print "Door number %r is unlocked!" % door.number
-
-
-def visible_monsters():
-    dict_of_room_monsters = populate_room_monster_dict()
-    for monster in dict_of_room_monsters:
-        print "You can see a %r!" % monster.name
-
-
 #-------- Player Functions --------#
 def xp_check():
     """Checks player xp and necessary xp and calls the level up function if applicable"""
