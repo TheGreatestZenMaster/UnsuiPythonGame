@@ -15,3 +15,6 @@ since followers of Zen attempt to move freely through life, without the constrai
 like free-floating clouds or flowing water.
 
 -Source [Wikipedia](http://en.wikipedia.org/wiki/Unsui)
+
+
+"Wake up to the sound of time fleeting and space opening doors to the spectrum of existence. Traverse ages past, futures as if present, and encounter beings that may or may not be of this reality. Unlock clues to solve the puzzle of what is happening, why it is happening, and powers to combat the manifestations and encounters that follow THE EVENT."
