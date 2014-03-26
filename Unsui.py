@@ -133,20 +133,6 @@ def take_action(action):
         return True
     return True
 
-
-def battle_engine(monster):
-    while True:
-        Wolf.attack(monster)
-        Player.attack(player, monster)
-
-
-def opponent_engine():
-    dict_of_room_monsters = populate_room_monster_dict()
-    for monster in dict_of_room_monsters:
-        battle_engine(monster)
-    return False
-
-
 #------ Main Loops ---------- #
 def hall_room_transition():
 
