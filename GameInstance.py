@@ -1,4 +1,18 @@
-class Game_Instance(object):
+'''
+This class defines the object which holds all game information. 
+Think of it like a giant game container in which everything goes.
+'''
+
+from items.Key import Key
+from items.Door import Door
+from rooms.Room import Room
+from rooms.Hall import Hall
+from Player.Player import Player
+from monsters.Wolf import Wolf
+from config import UnsuiConfigLoader
+
+
+class GameInstance(object):
     def __init__(self):
 
         self.keys = [Key("Key", "Room 1", 10001),

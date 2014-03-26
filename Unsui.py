@@ -2,18 +2,10 @@
 import sys
 
 #----- Unsui imports ------#
-from items.Key import Key
-from items.Door import Door
-from rooms.Room import Room
-from rooms.Hall import Hall
-from Player.Player import Player
-from monsters.Wolf import Wolf
 import user_input
-from config import UnsuiConfigLoader
-from opening_setup import opening_setup
 from GameInstance import GameInstance
 
-game = Game_Instance()
+game = GameInstance()
         
 # Available actions for the loops
 list_of_actions_available_room = ["grab", "leave", "stats", "location", "keys", "help"]
@@ -271,7 +263,7 @@ def upper_main(game,input=raw_input):
     This loop should never exit.
     Exception: if the player specifies to exit
     """
-    opening_setup(game)
+    user_input.opening_setup(game)
     while True:
         print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
                                                                 list_of_actions_available_true_main)

@@ -1,5 +1,5 @@
-from user_input import choose_object
-from opening_setup import opening_setup
+from user_input import choose_object, opening_setup
+from GameInstance import GameInstance
 
 import unittest
 
@@ -11,6 +11,8 @@ class basic_UI_tests(unittest.TestCase):
         '''
         runs through basic setup with random values
         '''
+        game = GameInstance()
+
         
         # raise NotImplementedError()
     
