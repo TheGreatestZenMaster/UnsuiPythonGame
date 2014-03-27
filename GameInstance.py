@@ -126,7 +126,7 @@ class GameInstance(object):
         
         
     #------- Room Populating function ----#
-    def generate_rooms_dict():
+    def generate_rooms_dict(self):
         return game.config_loader.get_by_type('room')
 
 
