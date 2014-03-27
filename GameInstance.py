@@ -25,6 +25,9 @@ class GameInstance(object):
         self.config_loader.generate()
 
     #------- Actions Functions --------#
+    def generate_rooms_dict(self):
+        return game.config_loader.get_by_type('room')
+        
     def take_action(self,action):
         """
         This function takes an action specified by a string
@@ -69,10 +72,8 @@ class GameInstance(object):
             return True
         else:
             print "That's not a valid command!!!"
-
-    def generate_rooms_dict():
-        return game.config_loader.get_by_type('room')
-        
+            
+"""        
 # NOTE: code below here is out-of-date and needs to be updated for use here. ~7yl4r
 
     # ------- Status Functions ------#
@@ -182,7 +183,6 @@ class GameInstance(object):
 
     #-------- Player Functions --------#
     def xp_check():
-        """Checks player xp and necessary xp and calls the level up function if applicable"""
         global player
         xp_needed = player.level * 10 + 15
         if player.xp >= xp_needed:
@@ -212,7 +212,6 @@ class GameInstance(object):
         game.player.move_room(game.config_loader.get_by_type_and_name('room', game.player.current_location.exits[int(room_choice)-1]))
 
         # Locked doors are to be reimplemented soon. For now I'm testing the configuration loader functionality
-        """
         dict_of_doors = generate_doors_dict()
         room_dict = generate_rooms_dict()
         for i in dict_of_doors:
@@ -245,11 +244,8 @@ class GameInstance(object):
                     for room in room_dict:
                         if room.number == door_number:
                             game.player.move_room(room)
-        """
-
+                            
     def action_main():
-        """This main function is the secondary loop that is operational while the player is in the room
-        """
         while True:
             if game.player.current_location.name == "Hallway":
                 hall_room_transition()
@@ -259,3 +255,4 @@ class GameInstance(object):
                 game_engine()
                 return False
 
+"""
