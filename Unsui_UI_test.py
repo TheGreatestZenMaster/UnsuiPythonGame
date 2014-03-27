@@ -1,4 +1,4 @@
-from user_input import choose_object, opening_setup
+from user_input import choose_object, opening_setup, help_info
 from GameInstance import GameInstance, BASE_ACTIONS
 
 import unittest
@@ -41,6 +41,27 @@ class UI_tests(unittest.TestCase):
         self.assertEqual(choose_object(items, goodChoice), testItem)
         # item1 should now not be in the list anymore...
         self.assertEqual(choose_object(items, goodChoice), None)
+        
+    def base_help_test(self):
+        '''tests out the help for all base actions'''
+        game = GameInstance()
+        opening_setup(game,input=randomString)
+        
+        for action in BASE_ACTIONS:
+            class pickAction(object):
+                def __init__(self):
+                    self.choice = action
+                def __call__(self,prompt):
+                    if self.choice == action:
+                        self.choice = 'back'
+                        return action
+                    elif self.choice == 'back':
+                        self.choice == None
+                        return 'back'
+                    else:
+                        raise Error('WAT')
+            chooser = pickAction()
+            help_info(input=chooser)
 
     def base_actions_test(self):
         ''' test to ensure that base actions don't crash '''
