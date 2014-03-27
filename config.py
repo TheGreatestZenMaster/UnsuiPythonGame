@@ -24,7 +24,7 @@ class UnsuiConfigLoader(object):
                         self.loaded_data['room'].append(self.create_room(section))
 
     def create_room(self, section):
-        return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"))
+        return Room(self.config.get(section, "name"))
 
     def generate(self):
         # Traverse directory looking for .conf files to load data from
