@@ -2,51 +2,45 @@ import ConfigParser
 import os
 from rooms.Room import Room
 
+
 class UnsuiConfigParser(ConfigParser.ConfigParser):
-			def getlist(self,section,option):
-				value = self.get(section,option)
-				return list(filter(None, (x.strip() for x in value.splitlines())))
+    def getlist(self,section,option):
+        value = self.get(section,option)
+        return list(filter(None, (x.strip() for x in value.splitlines())))
 
 
 class UnsuiConfigLoader(object):
-	def __init__(self):
-		
-		self.known_types = ["room", "item"]
+    def __init__(self):
+        self.known_types = ["room", "item"]
+        self.config = UnsuiConfigParser()
+        self.loaded_data = {'room' : [], 'item' : []}
 
-		self.config = UnsuiConfigParser()
-		self.loaded_data = {
-		'room' : [],
-		'item' : []
-		}
+    def load(self):
+        for section in self.config.sections():
+            for option in self.config.options(section):
+                if self.config.get(section, option) in self.loaded_data:
+                    # Create room objects from config file
+                    if self.config.get(section, option) == 'room':
+                        self.loaded_data['room'].append(self.create_room(section))
 
-	def load(self):
-		for section in self.config.sections():
-			for option in self.config.options(section):
-				if self.config.get(section, option) in self.loaded_data:
+    def create_room(self, section):
+        return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"))
 
-					# Create room objects from config file
-					if self.config.get(section, option) == 'room':
-						self.loaded_data['room'].append(self.create_room(section))
+    def generate(self):
+        # Traverse directory looking for .conf files to load data from
+        directory = os.path.dirname(os.path.realpath(__file__))
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.conf'):
+                    self.config.read(os.path.join(root, file))
+                    self.load()
 
-	def create_room(self, section):
-		return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"))
+    def get_by_type(self, type):
+        return self.loaded_data[type]
 
-	def generate(self):
-
-		# Traverse directory looking for .conf files to load data from
-		directory = os.path.dirname(os.path.realpath(__file__))
-		for root, dirs, files in os.walk(directory):
-			for file in files:
-				if file.endswith('.conf'):
-					self.config.read(os.path.join(root, file))
-					self.load()
-
-	def get_by_type(self, type):
-		return self.loaded_data[type]
-
-	def get_by_type_and_name(self, type, name):
-		for item in self.loaded_data[type]:
-			if item.name == name:
-				return item
-			else:
-				pass
+    def get_by_type_and_name(self, type, name):
+        for item in self.loaded_data[type]:
+            if item.name == name:
+                return item
+            else:
+                pass
