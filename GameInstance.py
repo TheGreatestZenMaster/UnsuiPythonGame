@@ -51,9 +51,10 @@ class GameInstance(object):
             try:
                 self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
             except ValueError:
-                self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
-            else: 
-                print 'Place not recognized.'
+                try:
+                    self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
+                except ValueError:
+                    print 'Place not recognized.'
         elif action == "stats":
             self.player.player_status()
             return True
