@@ -12,7 +12,7 @@ from Player.Player import Player
 from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
-from lexicon import Lexicon
+from parser import Parser
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are the actions which should always be available.
 
@@ -26,7 +26,7 @@ class GameInstance(object):
         self.config_loader = UnsuiConfigLoader()
         self.config_loader.generate()
 
-        self.lexicon = Lexicon()
+        self.parser = Parser()
 
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
@@ -34,12 +34,14 @@ class GameInstance(object):
         return self.config_loader.get_by_type('room')
 
     def take_action(self, command):
+        #print [i.name for i in self.player.current_location.contents]
         if command.verb.name == 'exit':
             sys.exit()
         if command.verb.name == 'look':
-            if command.object.name != None:
-                print command.object.name
+            if command.object != None:
                 self.config_loader.get_by_type_and_name('item', command.object.name).look()
+            else:
+                print self.player.current_location.description
 
 
     """    

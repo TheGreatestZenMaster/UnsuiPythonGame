@@ -1,3 +1,8 @@
+"""
+This file defines a parser which can parse a string into a Command object.
+"""
+
+
 WORD_TYPES = {
     'verb' : ['go', 'use', 'look', 'get', 'check', 'talk', 'take', 'pick', 'listen', 'pet'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
@@ -13,6 +18,9 @@ WORD_TYPES = {
 VOCABULARY = {word: word_type for word_type, words in WORD_TYPES.items() for word in words}
 
 class Command(object):
+	"""This class is what is returned by Parser.parse()
+	and for the moment consists of a verb and a direct object if it exists.
+	"""
 	def __init__(self, verb):
 		self.verb = verb
 		self.object = None
@@ -27,8 +35,10 @@ class Object(object):
 		self.type = type
 		self.modifiers = []
 
-class Lexicon(object):
-
+class Parser(object):
+	"""
+	The main method which is needed is the Parser.parse() method.
+	"""
 	def preprocess(self, sentence):
 		return sentence.lower()
 

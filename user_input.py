@@ -1,4 +1,4 @@
-from lexicon import Lexicon
+from parser import Parser
 
 default_input = raw_input
 

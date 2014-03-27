@@ -14,7 +14,7 @@ def upper_main(player_game, input=raw_input):
     user_input.opening_setup(player_game,input)
     while True:
         user_action = user_input.request_action(player_game,input)
-        command = player_game.lexicon.parse(user_action)
+        command = player_game.parser.parse(user_action)
         player_game.take_action(command)
 
 
