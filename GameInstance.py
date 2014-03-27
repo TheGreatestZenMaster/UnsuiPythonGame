@@ -26,6 +26,7 @@ class GameInstance(object):
 
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
+        ''' this returns a list of all rooms in the area '''
         return self.config_loader.get_by_type('room')
         
     def take_action(self,action,input=user_input.default_input):
