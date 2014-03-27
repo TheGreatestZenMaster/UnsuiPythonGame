@@ -7,16 +7,12 @@ import sys
 
 
 class Room(object):
-    def __init__(self, name, description, exits, number=0, victory=None):
+    def __init__(self, name):
         """
         NB. A list must be passed into exits
         """
         self.self = self
-        self.number = number
         self.name = name
-        self.description = description
-        self.exits = exits
-        self.victory = victory
         self.objects = list()
 
     def on_entering_room(self):
