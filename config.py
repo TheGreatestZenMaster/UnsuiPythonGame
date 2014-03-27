@@ -40,7 +40,9 @@ class UnsuiConfigLoader(object):
 
     def get_by_type_and_name(self, type, name):
         for item in self.loaded_data[type]:
-            if item.name == name:
+            if item.name.lower() == name.lower():
                 return item
             else:
                 pass
+        else:
+            raise ValueError('Cannot find '+str(type)+' '+str(name))

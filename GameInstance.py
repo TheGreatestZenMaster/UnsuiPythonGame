@@ -28,7 +28,7 @@ class GameInstance(object):
     def generate_rooms_dict(self):
         return self.config_loader.get_by_type('room')
         
-    def take_action(self,action):
+    def take_action(self,action,input=user_input.default_input):
         """
         This function takes an action specified by a string
          and completes that action.
@@ -47,8 +47,13 @@ class GameInstance(object):
             raise NotImplementedError('action_main call needs to be fixed') #action_main()
         elif action == "go":
             print self.player.current_location.exits
-            travel_location = raw_input("Which Room?")
-            self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
+            travel_location = input("Which Room?")
+            try:
+                self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
+            except ValueError:
+                self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
+            else: 
+                print 'Place not recognized.'
         elif action == "stats":
             self.player.player_status()
             return True

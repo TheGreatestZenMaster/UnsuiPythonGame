@@ -49,6 +49,9 @@ class UI_tests(unittest.TestCase):
         for action in BASE_ACTIONS:
             if action=="exit": # skip exit action (or else test breaks)
                 continue
-            game.take_action(action,input=randomString)
+            elif action=="help": # ignore help
+                continue
+            else:
+                game.take_action(action,input=randomString)
             
             
