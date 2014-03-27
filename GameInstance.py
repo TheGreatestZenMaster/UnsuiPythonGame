@@ -13,7 +13,7 @@ from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
 
-BASE_ACTIONS = ["look", "exit", "stats", "location", "help"] # these are the actions which should always be available.
+BASE_ACTIONS = ["look", "exit", "stats", "location", "help", "go"] # these are the actions which should always be available.
 
 class GameInstance(object):
     def __init__(self):
