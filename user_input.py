@@ -30,9 +30,9 @@ def choose_object(item_list, input=default_input):
 def opening_setup(game, input=default_input):
     """This opening setup gives us a player name and also provides the opening text"""
     name = input("Whats your name?")
-    room_hallway = game.config_loader.get_by_type_and_name('room', 'Hallway')
+    starting_room = game.config_loader.get_by_type_and_name('room', "Bedroom")
     game.player.name = name
-    game.player.current_location = room_hallway
+    game.player.current_location = starting_room
     game.player.player_location()
     # The opening text to give a little story(will change later once we have some actual story)
     opening_text = "Hello and welcome to your adventure %r!\n" \
@@ -52,7 +52,8 @@ def help_info(input=default_input):
                       "keys": "This command show you any keys you can see.",
                       "location": "This command tells you your current location.",
                       "fight": "This command lets you fight the monster",
-                      "help": "show this menu"
+                      "help": "show this menu",
+                      "go": "Travel to a room of your choice"
                       }
     while True:
         info_choice = input("What would you like to know more about? ('back' returns you to the prompt)").lower()
