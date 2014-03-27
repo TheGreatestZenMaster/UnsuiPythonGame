@@ -1,5 +1,5 @@
 from user_input import choose_object, opening_setup
-from GameInstance import GameInstance
+from GameInstance import GameInstance, BASE_ACTIONS
 
 import unittest
 import string
@@ -16,11 +16,11 @@ def randomString(prompt='', size=6, chars=string.printable):
 
     
 
-class basic_UI_tests(unittest.TestCase):
+class UI_tests(unittest.TestCase):
 
     def random_setup_test(self):
         '''
-        runs through basic setup with random values
+        runs through basic setup with random values to ensure it does not crash
         '''
         game = GameInstance()
         opening_setup(game,input=randomString)
@@ -41,3 +41,14 @@ class basic_UI_tests(unittest.TestCase):
         self.assertEqual(choose_object(items, goodChoice), testItem)
         # item1 should now not be in the list anymore...
         self.assertEqual(choose_object(items, goodChoice), None)
+
+    def base_actions_test(self):
+        ''' test to ensure that base actions don't crash '''
+        game = GameInstance()
+        opening_setup(game,input=randomString)
+        for action in BASE_ACTIONS:
+            if action=="exit": # skip exit action (or else test breaks)
+                continue
+            game.take_action(action,input=randomString)
+            
+            
