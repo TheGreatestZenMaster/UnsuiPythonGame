@@ -1,5 +1,4 @@
 #----- Base Python imports ------#
-import sys
 
 #----- Unsui imports ------#
 import user_input
@@ -10,8 +9,6 @@ game = GameInstance()
 # Available actions for the loops
 list_of_actions_available_room = ["grab", "leave", "stats", "location", "keys", "help"]
 
-
-
 def upper_main(game,input=raw_input):
     """
     This loop should never exit.
@@ -19,7 +16,9 @@ def upper_main(game,input=raw_input):
     """
     user_input.opening_setup(game,input)
     while True:
-        user_input.request_action(game,input)
+        user_action = user_input.request_action(game,input)
+        game.take_action(user_action)
+
 
 
 #------- Game Operation --------#

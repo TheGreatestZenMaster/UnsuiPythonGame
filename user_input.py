@@ -5,26 +5,13 @@ default_input = raw_input
 def request_action(game,input=default_input):
     '''
     This is used to ask the user to choose an action.
+    Returns requested user action.
     '''
-    list_of_actions_available_true_main = ["enter", "look", "exit", "stats", "location", "help"]
     
     print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
-                                                            list_of_actions_available_true_main)
-    take_action_main = input("What do you want to do?")
-    if take_action_main == "enter":
-        raise NotImplementedError('action_main call needs to be fixed') #action_main()
-    elif take_action_main == "exit":
-        sys.exit()
-    elif take_action_main == "stats":
-        game.player.player_status()
-    elif take_action_main == "help":
-        user_input.help_info()
-    elif take_action_main == "location":
-        game.player.player_location()
-    elif take_action_main == "look":
-        print game.player.current_location.description
-    else:
-        print "That's not a valid command!"
+                                                            game.actions_available)
+    return input("What do you want to do?")
+    
 
 def choose_object(item_list, input=default_input):
     '''
