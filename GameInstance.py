@@ -8,10 +8,10 @@ import sys
 from items.Key import Key
 from items.Door import Door
 from rooms.Room import Room
-from rooms.Hall import Hall
 from Player.Player import Player
 from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
+import user_input
 
 BASE_ACTIONS = ["look", "exit", "stats", "location", "help"] # these are the actions which should always be available.
 
