@@ -73,7 +73,8 @@ class Lexicon(object):
 						elif tokens[index][0] == 'verb':
 							break
 						index = index - 1
-			
+		elif tokens[0][0] == 'command':
+			command = Command(Verb(tokens[0][1]))
 		return command
 
 	def tokenise(self, sentence):
