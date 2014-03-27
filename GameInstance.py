@@ -8,10 +8,10 @@ import sys
 from items.Key import Key
 from items.Door import Door
 from rooms.Room import Room
-from rooms.Hall import Hall
 from Player.Player import Player
 from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
+import user_input
 
 BASE_ACTIONS = ["look", "exit", "stats", "location", "help"] # these are the actions which should always be available.
 
@@ -23,55 +23,45 @@ class GameInstance(object):
 
         self.config_loader = UnsuiConfigLoader()
         self.config_loader.generate()
-        
+
     #------- Actions Functions --------#
+    def generate_rooms_dict(self):
+        return game.config_loader.get_by_type('room')
+        
     def take_action(self,action):
         """
-        This function takes an action specified by a string 
+        This function takes an action specified by a string
          and completes that action.
         """
         # NOTE: currently there is no check to ensure that each action is available
         # TODO: check to see if action is available before trying... like:
         # if action in self.actions_available:
-        
+
         # === Base Actions: ===
+        room_dict = self.generate_rooms_dict()
         if action == "exit":
             sys.exit()
-        elif action == "stats":
-            self.player.player_status()
-        elif action == "help":
-            user_input.help_info()
-        elif action == "location":
-            self.player.player_location()
         elif action == "look":
-            print self.player.current_location.description
-            
-        # === room-navigation actions ===
+            raise NotImplementedError('action_main call needs to be fixed') #action_main()
         elif action == "enter":
             raise NotImplementedError('action_main call needs to be fixed') #action_main()
-        elif action == "leave":
-            for i in room_dict:
-                if i.name == self.player.current_location:
-                    self.current_room = i
-                    if not self.current_room.victory:
-                        room_xp = 25
-                        self.player.xp += room_xp
-                        print "Congrats you beat this room!"
-                        print "You earned %r xp!" % room_xp
-                        print "You exit the room!"
-                        prompt_levelup()
-                        self.current_room.victory = True
-                        self.player.current_location = "Hallway"
-                        return False
-                    else:
-                        print "You exit the room!"
-                        self.current_room.victory = True
-                        self.player.current_location = "Hallway"
-                        return False
-        elif action == "doors":
-            visible_doors()
+        elif action == "go":
+            travel_location = raw_input("Which Room?")
+            for room in room_dict:
+                if room.name.lower() == travel_location.lower():
+                    self.player.current_location = room.name
+                    self.player.player_location()
+                    break
+        elif action == "stats":
+            self.player.player_status()
             return True
-        
+        elif action == "help":
+            user_input.help_info()
+            return True
+        elif action == "location":
+            self.player.player_location()
+            return True
+
         # === iteminteractions ===
         elif action == "grab":
             self.player.inventory.add_item(user_input.choose_object(self.keys))
@@ -82,7 +72,8 @@ class GameInstance(object):
             return True
         else:
             print "That's not a valid command!!!"
-        
+            
+"""        
 # NOTE: code below here is out-of-date and needs to be updated for use here. ~7yl4r
 
     # ------- Status Functions ------#
@@ -192,7 +183,6 @@ class GameInstance(object):
 
     #-------- Player Functions --------#
     def xp_check():
-        """Checks player xp and necessary xp and calls the level up function if applicable"""
         global player
         xp_needed = player.level * 10 + 15
         if player.xp >= xp_needed:
@@ -222,7 +212,6 @@ class GameInstance(object):
         game.player.move_room(game.config_loader.get_by_type_and_name('room', game.player.current_location.exits[int(room_choice)-1]))
 
         # Locked doors are to be reimplemented soon. For now I'm testing the configuration loader functionality
-        """
         dict_of_doors = generate_doors_dict()
         room_dict = generate_rooms_dict()
         for i in dict_of_doors:
@@ -255,11 +244,8 @@ class GameInstance(object):
                     for room in room_dict:
                         if room.number == door_number:
                             game.player.move_room(room)
-        """
-
+                            
     def action_main():
-        """This main function is the secondary loop that is operational while the player is in the room
-        """
         while True:
             if game.player.current_location.name == "Hallway":
                 hall_room_transition()
@@ -269,3 +255,4 @@ class GameInstance(object):
                 game_engine()
                 return False
 
+"""
