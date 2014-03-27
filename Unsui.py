@@ -5,9 +5,6 @@ import user_input
 from GameInstance import GameInstance
 
 game = GameInstance()
-        
-# Available actions for the loops
-list_of_actions_available_room = ["grab", "leave", "stats", "location", "keys", "help"]
 
 def upper_main(game,input=raw_input):
     """
