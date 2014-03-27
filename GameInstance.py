@@ -26,7 +26,7 @@ class GameInstance(object):
 
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
-        return game.config_loader.get_by_type('room')
+        return self.config_loader.get_by_type('room')
         
     def take_action(self,action):
         """
@@ -42,7 +42,7 @@ class GameInstance(object):
         if action == "exit":
             sys.exit()
         elif action == "look":
-            raise NotImplementedError('action_main call needs to be fixed') #action_main()
+            print self.player.current_location.description
         elif action == "enter":
             raise NotImplementedError('action_main call needs to be fixed') #action_main()
         elif action == "go":
