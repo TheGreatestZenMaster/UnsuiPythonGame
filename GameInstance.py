@@ -12,8 +12,10 @@ from Player.Player import Player
 from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
+from lexicon import Lexicon
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are the actions which should always be available.
+
 
 class GameInstance(object):
     def __init__(self):
@@ -24,16 +26,28 @@ class GameInstance(object):
         self.config_loader = UnsuiConfigLoader()
         self.config_loader.generate()
 
+        self.lexicon = Lexicon()
+
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
         ''' this returns a list of all rooms in the area '''
         return self.config_loader.get_by_type('room')
-        
+
+    def take_action(self, command):
+        if command.verb.name == 'exit':
+            sys.exit()
+        if command.verb.name == 'look':
+            if command.object.name != None:
+                print command.object.name
+                self.config_loader.get_by_type_and_name('item', command.object.name).look()
+
+
+    """    
     def take_action(self,action,input=user_input.default_input):
-        """
+        
         This function takes an action specified by a string
          and completes that action.
-        """
+        
         # NOTE: currently there is no check to ensure that each action is available
         # TODO: check to see if action is available before trying... like:
         # if action in self.actions_available:
@@ -75,3 +89,4 @@ class GameInstance(object):
             raise NotImplementedError('combat engine hasn\'t been implemented yet.')
         else:
             print "That's not a valid command!!!"
+    """

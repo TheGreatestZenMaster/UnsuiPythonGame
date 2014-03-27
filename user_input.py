@@ -1,4 +1,4 @@
-# from Unsui import action_main # what is this and how can we make it more trasparent?
+from lexicon import Lexicon
 
 default_input = raw_input
 
