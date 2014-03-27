@@ -46,12 +46,9 @@ class GameInstance(object):
         elif action == "enter":
             raise NotImplementedError('action_main call needs to be fixed') #action_main()
         elif action == "go":
+            print self.player.current_location.exits
             travel_location = raw_input("Which Room?")
-            for room in room_dict:
-                if room.name.lower() == travel_location.lower():
-                    self.player.current_location = room.name
-                    self.player.player_location()
-                    break
+            self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
         elif action == "stats":
             self.player.player_status()
             return True
