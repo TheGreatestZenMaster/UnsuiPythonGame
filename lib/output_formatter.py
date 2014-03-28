@@ -8,8 +8,8 @@ init()
 
 #sys.stdout.write('%s%-7s' % (Fore.CYAN, 'testsetadfsd'))
 
-def output( inputString ):
-    print inputString
+def print_c( inputString ):
+    sys.stdout.write(inputString)
 
 
 if __name__ == '__main__':
