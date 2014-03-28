@@ -5,7 +5,7 @@
 # The objects can have modifiers applied a.k.a adjectives
 
 
-
+# I may move some of the strings around, e.g. moving the 'extra' ones to 'command'
 WORD_TYPES = {
     'verb' : ['go', 'use', 'look', 'get', 'check', 'talk', 'take', 'pick', 'listen', 'pet'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
@@ -18,6 +18,7 @@ WORD_TYPES = {
     'extra': ['exit', 'save', 'load', 'reset']
 }
 
+# This creates a dictionary of (word, type)
 VOCABULARY = {word: word_type for word_type, words in WORD_TYPES.items() for word in words}
 
 class Command(object):

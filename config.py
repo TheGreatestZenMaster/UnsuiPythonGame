@@ -19,9 +19,10 @@ class UnsuiConfigLoader(object):
         for section in self.config.sections():
             for option in self.config.options(section):
                 if self.config.get(section, option) in self.loaded_data:
-                    # Create room objects from config file
+                    # Creates room objects from config file
                     if self.config.get(section, option) == 'room':
                         self.loaded_data['room'].append(self.create_room(section))
+                    # Creates item objects from config file
                     if self.config.get(section, option) == 'item':
                         self.loaded_data['item'].append(self.create_item(section))
 
@@ -39,7 +40,7 @@ class UnsuiConfigLoader(object):
         return Item(self.config.get(section, "id"), self.config.get(section, "name"), self.config.get(section, "description"))
 
     def generate(self):
-        # Traverse directory looking for .conf files to load data from
+        """Traverses directory looking for .conf files and loads data from them"""
         directory = os.path.dirname(os.path.realpath(__file__))
         for root, dirs, files in os.walk(directory):
             for file in files:
