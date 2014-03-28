@@ -15,6 +15,8 @@ class UnsuiConfigLoader(object):
         self.config = UnsuiConfigParser()
         self.loaded_data = {'room' : [], 'item' : []}
 
+        self.unpopulated_rooms = []
+
     def load(self):
         for section in self.config.sections():
             for option in self.config.options(section):
@@ -32,7 +34,12 @@ class UnsuiConfigLoader(object):
         for item in self.config.getlist(section, "contents"):
             if item == "None":
                 break
-            contents_list.append(self.get_by_type_and_name('item', item))
+            try:
+                contents_list.append(self.get_by_type_and_name('item', item))
+            except ValueError:
+                self.unpopulated_rooms.append([self.config.get(section, "name"), self.config.getlist(section, "contents")])
+                
+
         return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"), contents_list)
 
     def create_item(self, section):
@@ -47,6 +54,15 @@ class UnsuiConfigLoader(object):
                 if file.endswith('.conf'):
                     self.config.read(os.path.join(root, file))
                     self.load()
+
+        self.populate_rooms()
+
+    def populate_rooms(self):
+        """"""
+        for room in self.unpopulated_rooms:
+            for item in room[1]:
+                self.get_by_type_and_name('room', room[0]).contents.append(self.get_by_type_and_name('item', item))
+
 
     def get_by_type(self, type):
         return self.loaded_data[type]

@@ -40,6 +40,7 @@ class GameInstance(object):
 
         # TODO:
         #   - Reimplement other archived commands.
+        print [i.name for i in self.player.current_location.contents]
         if command:
             if command.verb.name == 'exit':
                 sys.exit()
