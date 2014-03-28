@@ -23,10 +23,11 @@ class GameInstance(object):
 
         self.player = Player("NoName", "Male", "Human", None)
 
+        self.parser = Parser()
+
         self.config_loader = UnsuiConfigLoader()
         self.config_loader.generate()
 
-        self.parser = Parser()
 
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
@@ -35,14 +36,31 @@ class GameInstance(object):
 
     def take_action(self, command):
         #print [i.name for i in self.player.current_location.contents]
-        if command.verb.name == 'exit':
-            sys.exit()
-        if command.verb.name == 'look':
-            if command.object != None:
-                self.config_loader.get_by_type_and_name('item', command.object.name).look()
-            else:
-                print self.player.current_location.description
+        if command:
+            if command.verb.name == 'exit':
+                sys.exit()
 
+            if command.verb.name == 'look':
+                # call look function of object of look
+                if command.object != None:
+                    self.config_loader.get_by_type_and_name('item', command.object.name).look()
+                else:    # If there is no object of look it will print the current room's description
+                    print self.player.current_location.description
+
+            if command.verb.name == 'go':
+                print self.player.current_location.exits
+                travel_location = raw_input("Which Room?")
+                try:
+                    self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
+                except ValueError:
+                    try:
+                        self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
+                    except ValueError:
+                        print 'Place not recognized.'
+        else:
+            print "Command not recognised."
+
+    ### This code is to be reimplemented using the Command structure.
 
     """    
     def take_action(self,action,input=user_input.default_input):
