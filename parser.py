@@ -1,6 +1,9 @@
-"""
-This file defines a parser which can parse a string into a Command object.
-"""
+
+# This module defines a parser which can parse a string into a Command object.
+# A command object consists of a verb instance and a object instance.
+# For now the objects are always the direct object of the verb.
+# The objects can have modifiers applied a.k.a adjectives
+
 
 
 WORD_TYPES = {
@@ -40,9 +43,11 @@ class Parser(object):
 	The main method which is needed is the Parser.parse() method.
 	"""
 	def preprocess(self, sentence):
+		"""Returns sentence in lowercase."""
 		return sentence.lower()
 
 	def scan(self, sentence):
+		"""Tokenises sentence returning a list of the words and their types"""
 		tokens = []
 		for word in sentence.split():
 			try:
@@ -59,6 +64,7 @@ class Parser(object):
 		return tokens
 		
 	def clean(self, tokens):
+		"""Removes articles from the token list"""
 		clean_tokens = tokens
 		for token in clean_tokens:
 			if token == ('article', 'an') or token == ('article', 'a'):
@@ -66,6 +72,7 @@ class Parser(object):
 		return clean_tokens
 
 	def classify(self, tokens):
+		"""Creates the Command object and applies modifiers to objects."""
 		command = False
 		if tokens[0][0] == 'verb':
 			command = Command(Verb(tokens[0][1]))
@@ -88,16 +95,12 @@ class Parser(object):
 		return command
 
 	def tokenise(self, sentence):
+		"""Returns a list of clean tokens"""
 		output = self.preprocess(sentence)
 		output = self.scan(output)
 		output = self.clean(output)
 		return output
 
 	def parse(self, sentence):
+		"""Takes a sentence and returns a Command object"""
 		return self.classify(self.tokenise(sentence))
-
-def return_verbs():
-	verb_list = []
-	for word in WORD_TYPES['verb']:
-		verb_list.append(word)
-	return verb_list

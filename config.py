@@ -26,6 +26,7 @@ class UnsuiConfigLoader(object):
                         self.loaded_data['item'].append(self.create_item(section))
 
     def create_room(self, section):
+        """Returns a Room instance."""
         contents_list = []
         for item in self.config.getlist(section, "contents"):
             if item == "None":
@@ -34,6 +35,7 @@ class UnsuiConfigLoader(object):
         return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"), contents_list)
 
     def create_item(self, section):
+        """Returns a Item instance."""
         return Item(self.config.get(section, "id"), self.config.get(section, "name"), self.config.get(section, "description"))
 
     def generate(self):
