@@ -9,7 +9,7 @@
 WORD_TYPES = {
     'verb' : ['go', 'use', 'look', 'get', 'check', 'talk', 'take', 'pick', 'listen', 'pet'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
-    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk'],
+    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'hallway', 'kitchen', 'bedroom'],
     'adjective': ['red'],
     'preposition': ['on', 'under', 'from', 'to', 'behind'],
     'stop': ['the', 'in', 'of'],

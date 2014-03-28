@@ -52,15 +52,18 @@ class GameInstance(object):
                     print self.player.current_location.description
 
             if command.verb.name == 'go':
-                print self.player.current_location.exits
-                travel_location = raw_input("Which Room?")
-                try:
-                    self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
-                except ValueError:
+                if command.object != None:
+                    self.player.current_location = self.config_loader.get_by_type_and_name('room', command.object.name)
+                else:
+                    print self.player.current_location.exits
+                    travel_location = raw_input("Which Room?")
                     try:
-                        self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
+                        self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
                     except ValueError:
-                        print 'Place not recognized.'
+                        try:
+                            self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
+                        except ValueError:
+                            print 'Place not recognized.'
         else:
             print "Command not recognised."
 
