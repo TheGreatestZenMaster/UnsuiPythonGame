@@ -1,7 +1,7 @@
 import ConfigParser
 import os
 from rooms.Room import Room
-
+from items.Item import Item
 
 class UnsuiConfigParser(ConfigParser.ConfigParser):
     def getlist(self,section,option):
@@ -22,9 +22,19 @@ class UnsuiConfigLoader(object):
                     # Create room objects from config file
                     if self.config.get(section, option) == 'room':
                         self.loaded_data['room'].append(self.create_room(section))
+                    if self.config.get(section, option) == 'item':
+                        self.loaded_data['item'].append(self.create_item(section))
 
     def create_room(self, section):
-        return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"))
+        contents_list = []
+        for item in self.config.getlist(section, "contents"):
+            if item == "None":
+                break
+            contents_list.append(self.get_by_type_and_name('item', item))
+        return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"), contents_list)
+
+    def create_item(self, section):
+        return Item(self.config.get(section, "id"), self.config.get(section, "name"), self.config.get(section, "description"))
 
     def generate(self):
         # Traverse directory looking for .conf files to load data from
