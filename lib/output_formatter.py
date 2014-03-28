@@ -1,7 +1,7 @@
 from colorama import init, Fore
 import sys
 
-init()
+
 
 
 #sys.stdout.write('%s%-7s' % (Fore.RED, 'RED'))

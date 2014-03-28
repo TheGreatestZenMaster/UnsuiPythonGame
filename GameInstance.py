@@ -2,10 +2,7 @@
 This class defines the object which holds all game information. 
 Think of it like a giant game container in which everything goes.
 '''
-
 import sys
-import os
-sys.path.append( os.getcwd() + '\\lib')
 
 from items.Key import Key
 from items.Door import Door
@@ -13,8 +10,6 @@ from rooms.Room import Room
 from Player.Player import Player
 from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
-
-import output_formatter
 import user_input
 from parser import Parser
 

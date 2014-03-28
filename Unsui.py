@@ -1,12 +1,19 @@
 #----- Base Python imports ------#
 
+#----- Set path to library ------#
+import os
+import sys
+sys.path.append( os.getcwd() + '\\lib')
+
 #----- Unsui imports ------#
 import user_input
 from GameInstance import GameInstance
 
-from colorama import init, Fore
-import sys
+#----- Library imports -----#
+import colorama
 
+
+colorama.init()
 player_game = GameInstance()
 
 def upper_main(player_game, input=raw_input):
