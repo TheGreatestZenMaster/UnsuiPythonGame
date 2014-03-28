@@ -4,6 +4,9 @@
 import user_input
 from GameInstance import GameInstance
 
+from colorama import init, Fore
+import sys
+
 player_game = GameInstance()
 
 def upper_main(player_game, input=raw_input):

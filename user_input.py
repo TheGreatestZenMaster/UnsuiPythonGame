@@ -1,10 +1,6 @@
 from parser import Parser
 
 import sys
-import os
-sys.path.append( os.getcwd() + '\\lib')
-
-import output_formatter
 
 default_input = raw_input
 
@@ -43,7 +39,7 @@ def opening_setup(game, input=default_input):
     # The opening text to give a little story(will change later once we have some actual story)
     opening_text = "Hello and welcome to your adventure {}!\n" \
                    "Its a bright new day! Lets get to it!".format(game.player.get_name())
-    output_formatter.print_c(opening_text)
+    print opening_text
     game.player.level_up() 
 
 #------Help function ------#
