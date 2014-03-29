@@ -3,7 +3,7 @@
 #----- Set path to library ------#
 import os
 import sys
-sys.path.append( os.getcwd() + '\\lib')
+sys.path.append( os.path.join(os.getcwd(),'lib'))
 
 #----- Unsui imports ------#
 import user_input
