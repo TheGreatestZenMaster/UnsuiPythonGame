@@ -67,12 +67,14 @@ class UI_tests(unittest.TestCase):
         ''' test to ensure that base actions don't crash '''
         game = GameInstance()
         opening_setup(game,input=randomString)
+        
         for action in BASE_ACTIONS:
             if action=="exit": # skip exit action (or else test breaks)
                 continue
             elif action=="help": # ignore help
                 continue
             else:
-                game.take_action(action,input=randomString)
+                command = game.parser.parse(action)
+                game.take_action(command,input=randomString)
             
             

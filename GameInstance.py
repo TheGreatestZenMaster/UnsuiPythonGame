@@ -33,7 +33,7 @@ class GameInstance(object):
         ''' this returns a list of all rooms in the area '''
         return self.config_loader.get_by_type('room')
 
-    def take_action(self, command):
+    def take_action(self, command, input=user_input.default_input):
 
         # This method now uses the Command object returned from the Parser
         # This means you can call commands with 2 words, e.g. 'look desk'
@@ -58,10 +58,16 @@ class GameInstance(object):
 
             if command.verb.name == 'go':
                 if command.object != None:
-                    self.player.current_location = self.config_loader.get_by_type_and_name('room', command.object.name)
+                    try:
+                        self.player.current_location = self.config_loader.get_by_type_and_name('room', command.object.name)
+                    except ValueError as err:
+                        if err.message[0:16] == 'Cannot find room':
+                            print err.message
+                        else:
+                            raise
                 else:
                     print self.player.current_location.exits
-                    travel_location = raw_input("Which Room?")
+                    travel_location = input("Which Room?")
                     try:
                         self.player.current_location = self.config_loader.get_by_type_and_name('room', self.player.current_location.exits[int(travel_location)-1])
                     except ValueError:
