@@ -10,8 +10,7 @@ import user_input
 from GameInstance import GameInstance
 
 #----- Library imports -----#
-import colorama
-
+import colorama 
 
 colorama.init()
 player_game = GameInstance()

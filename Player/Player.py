@@ -1,4 +1,5 @@
 from Inventory import Inventory
+from colorama import Fore as text_color
 
 max_level = 100
 
@@ -20,7 +21,7 @@ class Player(object):
         self.sex = sex
         self.current_location = current_location
         
-        self.text_color = '\033[33m'
+        self.text_color = text_color.YELLOW
         self.health = 0
         self.max_hp = 0
         self.attack = 0
@@ -63,4 +64,4 @@ class Player(object):
         self.current_location = destination_room
 
     def get_name(self):
-        return self.text_color + self.name + '\x1b[39;49m'
+        return self.text_color + self.name + text_color.RESET
