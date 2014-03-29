@@ -75,6 +75,14 @@ class GameInstance(object):
                             self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
                         except ValueError:
                             print 'Place not recognized.'
+            if command.verb.name == 'stats':
+                self.player.player_status()
+
+            if command.verb.name == 'help':
+                user_input.help_info()
+
+            if command.verb.name == 'location':
+                self.player.player_location()
         else:
             print "Command not recognised."
 
