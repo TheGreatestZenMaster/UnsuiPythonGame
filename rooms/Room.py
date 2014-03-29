@@ -3,8 +3,7 @@ This is the base class for room. Rooms types or specific room definitions should
 '''
 #----- Base Python imports------#
 import sys
-
-
+from Player.Inventory import Inventory
 
 class Room(object):
     def __init__(self, name, description, exits, contents):
@@ -15,14 +14,14 @@ class Room(object):
         self.name = name
         self.description = description
         self.exits = exits
-        self.contents = contents
+
+        self.inventory = Inventory()
+        for item in contents:
+            self.inventory.add_item(item)
+
 
     def on_entering_room(self):
         print "You have entered the %s" % self.name
 
     def objects_in_room(self):
-        if len(self.objects) > 0:
-            for room_object in self.objects:
-                print "There is %s" % room_object.name
-        else:
-            print "The room seems to be empty"
+        print self.inventory.list_of_items()

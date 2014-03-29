@@ -1,20 +1,31 @@
 class Inventory(object):
     def __init__(self):
-        self.items = list()
+        self.contents = []
 
     def add_item(self, item):
-        if item != None:
-            self.items.append(item)
-            print "The %s was added to your inventory!" % item.name
+        self.contents.append(item)
 
     def remove_item(self, item):
-        for remove_item in self.items:
-            if item == remove_item.name:
-                self.items.remove(remove_item)
-                print "The %s was removed from your inventory." % remove_item.name
-                break
-            else:
-                print "something is wrong"
+        self.contents.remove(item)
+
+    def list_of_items(self, item_type='all', return_type='object'):
+        return_list = []
+        for item in self.contents:
+            return_list.append(item)
+        return return_list
+
+    def list_of_items_by_name(self):
+        return_list = []
+        for item in self.contents:
+            return_list.append(item.name)
+        return return_list
+
+    def list_of_items_by_type(self, item_type):
+        return_list = []
+        for item in self.contents:
+            if item.type == item_type:
+                return_list.append(item.name)
+        return return_list
 
     def current_inventory(self):
         if len(self.items) > 0:

@@ -5,7 +5,6 @@ import os
 import sys
 sys.path.append( os.path.join(os.getcwd(),'lib'))
 
-print __import__('parser')
 
 #----- Unsui imports ------#
 import user_input
