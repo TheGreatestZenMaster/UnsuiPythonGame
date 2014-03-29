@@ -11,7 +11,7 @@ from Player.Player import Player
 from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
-from parser import Parser
+from input_parser import Parser
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are the actions which should always be available.
 
