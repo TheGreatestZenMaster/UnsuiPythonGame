@@ -35,21 +35,27 @@ class GameInstance(object):
         return self.config_loader.get_by_type('room')
 
     def take_action(self, command):
+
         # This method now uses the Command object returned from the Parser
         # This means you can call commands with 2 words, e.g. 'look desk'
 
         # TODO:
         #   - Reimplement other archived commands.
+        #   - Move this code to user_input maybe
+
         if command:
             if command.verb.name == 'exit':
                 sys.exit()
 
             if command.verb.name == 'look':
                 # call look function of object of look
-                if command.object != None:
-                    self.config_loader.get_by_type_and_name('item', command.object.name).look()
-                else:    # If there is no object of look it will print the current room's description
+                if command.object == None:
                     print self.player.current_location.description
+                    
+                elif command.object.type == 'error':
+                    print "I don't understand %s" % command.object.name
+                else:    # If there is no object of look it will print the current room's description
+                    self.config_loader.get_by_type_and_name('item', command.object.name).look()
 
             if command.verb.name == 'go':
                 if command.object != None:
