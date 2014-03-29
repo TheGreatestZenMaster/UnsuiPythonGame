@@ -1,4 +1,4 @@
-from parser import Parser
+from input_parser import Parser
 import sys
 
 default_input = raw_input
