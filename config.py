@@ -10,6 +10,13 @@ class UnsuiConfigParser(ConfigParser.ConfigParser):
 
 
 class UnsuiConfigLoader(object):
+    """
+    Loads objects into memory from config files
+    Current supported: Room, Item
+
+    TODO:
+        - Support NPC Class and Dialogue systems
+    """
     def __init__(self):
         self.known_types = ["room", "item"]
         self.config = UnsuiConfigParser()

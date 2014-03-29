@@ -42,6 +42,9 @@ class Object(object):
 class Parser(object):
 	"""
 	The main method which is needed is the Parser.parse() method.
+
+	TODO:
+		- Support prepositions
 	"""
 	def preprocess(self, sentence):
 		"""Returns sentence in lowercase."""

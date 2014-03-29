@@ -35,11 +35,13 @@ class GameInstance(object):
         return self.config_loader.get_by_type('room')
 
     def take_action(self, command):
+
         # This method now uses the Command object returned from the Parser
         # This means you can call commands with 2 words, e.g. 'look desk'
 
         # TODO:
         #   - Reimplement other archived commands.
+        #   - Move this code to user_input maybe
 
         if command:
             if command.verb.name == 'exit':
