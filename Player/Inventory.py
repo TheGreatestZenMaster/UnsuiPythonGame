@@ -22,4 +22,3 @@ class Inventory(object):
                 print "In your inventory, there is a...", item.name
         else:
             print "Your inventory is empty!"
-        
