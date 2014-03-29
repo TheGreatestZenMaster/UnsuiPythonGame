@@ -94,8 +94,9 @@ class Parser(object):
 						elif tokens[index][0] == 'verb':
 							break
 						index = index - 1
-				elif token[0] == 'error':
+				elif token[0] == 'error' or token[0] == 'verb':
 					command.object = Object(token[1], 'error')
+
 		elif tokens[0][0] == 'command':
 			command = Command(Verb(tokens[0][1]))
 		return command

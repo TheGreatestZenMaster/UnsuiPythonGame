@@ -10,7 +10,7 @@ def request_action(game,input=default_input):
     
     print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
                                                             game.actions_available)
-    return input("What do you want to do?")
+    return input("What do you want to do? ")
     
 
 def choose_object(item_list, input=default_input):
