@@ -15,7 +15,7 @@ WORD_TYPES = {
     'stop': ['the', 'in', 'of'],
     'article': ['a', 'an', 'the'],
     'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map'],
-    'extra': ['exit', 'save', 'load', 'reset']
+    'extra': ['save', 'load', 'reset']
 }
 
 # This creates a dictionary of (word, type)
@@ -32,6 +32,7 @@ class Command(object):
 class Verb(object):
 	def __init__(self, name):
 		self.name = name
+		self.modifiers = []
 
 class Object(object):
 	def __init__(self, name, type):
@@ -86,14 +87,17 @@ class Parser(object):
 					object = Object(token[1], 'direct')
 					command.object = object
 
-					# Check for Adjective:
+					# Check for Adjective + Prepositions:
 					index = tokens.index(token) - 1
 					while True:
 						if tokens[index][0] == 'adjective':
 							object.modifiers.append(tokens[index][1])
+						if tokens[index][0] == 'preposition':
+							command.verb.modifiers.append(tokens[index][1])
 						elif tokens[index][0] == 'verb':
 							break
 						index = index - 1
+
 				elif token[0] == 'error':
 					command.object = Object(token[1], 'error')
 
