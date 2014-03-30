@@ -14,13 +14,16 @@ import lib.colorama as colorama
 colorama.init()
 player_game = GameInstance()
 
-def upper_main(player_game, input=raw_input):
+def upper_main(player_game, input=raw_input, load=False):
     """
     This loop should never exit.
     Exception: if the player specifies to exit
     """
-    user_input.opening_setup(player_game,input)
+
+    if not load:
+        user_input.opening_setup(player_game,input)
     while True:
+
         user_action = user_input.request_action(player_game,input)
         if not user_action == "":
 		    # Commands are interpreted after being parsed into a Command object
@@ -30,4 +33,15 @@ def upper_main(player_game, input=raw_input):
 
 #------- Game Operation --------#
 if __name__ == '__main__':
-    upper_main(player_game)
+
+    # This is temporary to test save/load functionality
+    while True:
+        print "load existing game or start new game?"
+        input_string = raw_input("load/start? ")
+        if input_string == 'load':
+            player_game = GameInstance(load="example_save.conf")
+            upper_main(player_game, load=True)
+        if input_string == 'start':
+            upper_main(player_game)
+
+    
