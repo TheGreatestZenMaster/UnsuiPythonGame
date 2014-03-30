@@ -67,13 +67,13 @@ def parser_classify_test():
     assert_equal(command2.object.name, 'kitchen')
 
     # Single adjectives
-    sentence1 = parser.tokenise('look at black cat')
+    sentence1 = parser.tokenise('pet black cat')
     sentence2 = parser.tokenise('inspect the big window')
 
     command1 = parser.classify(sentence1)
     command2 = parser.classify(sentence2)
 
-    assert_equal(command1.verb.name, 'look')
+    assert_equal(command1.verb.name, 'pet')
     assert_equal(command1.verb.modifiers, [])
     assert_equal(command1.object.name, 'cat')
     assert_equal(command1.object.type, 'direct')
@@ -84,3 +84,7 @@ def parser_classify_test():
     assert_equal(command2.object.name, 'window')
     assert_equal(command2.object.type, 'direct')
     assert_equal(command2.object.modifiers, ['big'])
+
+    # Two adjectives
+
+    ### TODO... 
