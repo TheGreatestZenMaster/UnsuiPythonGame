@@ -3,7 +3,7 @@ This is the base class for room. Rooms types or specific room definitions should
 '''
 #----- Base Python imports------#
 import sys
-from UnsuiPythonGame.player.Inventory import Inventory
+from UnsuiPythonGame.Player.Inventory import Inventory
 
 class Room(object):
     def __init__(self, name, description, exits, contents):
