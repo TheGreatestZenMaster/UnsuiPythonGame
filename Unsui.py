@@ -30,4 +30,5 @@ def upper_main(player_game, input=raw_input):
 
 
 #------- Game Operation --------#
-upper_main(player_game)
+if __name__ == '__main__':
+    upper_main(player_game)
