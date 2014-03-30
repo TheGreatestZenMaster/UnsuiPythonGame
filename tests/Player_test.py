@@ -3,7 +3,7 @@
 import unittest
 from random import randrange
 
-from Player import Player, max_level
+from Player.Player import Player, max_level
 
 class basic_leveling_check(unittest.TestCase):
 
