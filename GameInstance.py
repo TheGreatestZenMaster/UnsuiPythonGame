@@ -6,8 +6,8 @@ import sys
 
 from items.Key import Key
 from items.Door import Door
-from UnsuiPythonGame.rooms.Room import Room
-from UnsuiPythonGame.Player.Player import Player
+from rooms.Room import Room
+from Player.Player import Player
 from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
