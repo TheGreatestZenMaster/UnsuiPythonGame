@@ -12,6 +12,7 @@ from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
 from input_parser import Parser
+from make_events import getEventList
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are the actions which should always be available.
 
@@ -21,17 +22,28 @@ class GameInstance(object):
         self.actions_available = BASE_ACTIONS
 
         self.player = Player("NoName", "Male", "Human", None)
-
+        
         self.parser = Parser()
 
         self.config_loader = UnsuiConfigLoader()
         self.config_loader.generate()
-
+        
+        self.events = getEventList(self)
 
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
         ''' this returns a list of all rooms in the area '''
         return self.config_loader.get_by_type('room')
+        
+    def check_events(self):
+        '''
+        Checks all events in the event list to see 
+        if they have been triggered. If so, performs event action
+        and removes event from the list.
+        '''
+        for event in self.events:
+            if event.check():
+                player_game.events.remove(event)
 
     def take_action(self, command, input=user_input.default_input):
 

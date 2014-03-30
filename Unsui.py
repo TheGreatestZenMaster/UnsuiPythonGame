@@ -26,8 +26,7 @@ def upper_main(player_game, input=raw_input):
 		    # Commands are interpreted after being parsed into a Command object
             command = player_game.parser.parse(user_action)
             player_game.take_action(command)
-
-
+            player_game.check_events()
 
 #------- Game Operation --------#
 if __name__ == '__main__':
