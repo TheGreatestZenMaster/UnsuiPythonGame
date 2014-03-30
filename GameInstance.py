@@ -3,6 +3,7 @@ This class defines the object which holds all game information.
 Think of it like a giant game container in which everything goes.
 '''
 import sys
+from datetime import datetime
 
 from items.Key import Key
 from items.Door import Door
@@ -19,6 +20,9 @@ BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are t
 
 class GameInstance(object):
     def __init__(self):
+        self.GAME_START = datetime.now()
+        self.commands_entered = 0
+        
         self.actions_available = BASE_ACTIONS
 
         self.player = Player("NoName", "Male", "Human", None)
@@ -43,7 +47,7 @@ class GameInstance(object):
         '''
         for event in self.events:
             if event.check():
-                player_game.events.remove(event)
+                self.events.remove(event)
 
     def take_action(self, command, input=user_input.default_input):
 
@@ -90,6 +94,9 @@ class GameInstance(object):
                             
             if command.verb.name == 'stats':
                 self.player.player_status()
+                print ' ### GAME STATS ### '
+                print 'game started : ', self.GAME_START
+                print 'commands entered : ', self.commands_entered
 
             if command.verb.name == 'help':
                 user_input.help_info()
@@ -100,5 +107,6 @@ class GameInstance(object):
             if command.verb.name == 'inventory' or command.verb.name == 'bag':
                 print self.player.inventory.list_of_items()
 
+            self.commands_entered += 1
         else:
             print "Command not recognised."
