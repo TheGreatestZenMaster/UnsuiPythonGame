@@ -79,6 +79,8 @@ class Parser(object):
 	def classify(self, tokens):
 		"""Creates the Command object and applies modifiers to objects."""
 		command = False
+		if tokens == []:
+			return command
 		if tokens[0][0] == 'verb':
 			command = Command(Verb(tokens[0][1]))
 			for token in tokens[0:]:

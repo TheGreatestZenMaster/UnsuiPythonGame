@@ -5,13 +5,13 @@ more clever.
 import datetime
 
 from Event import Event
-from Trigger import Trigger, playerLevelAbove, locationIs, allwaysTrue, commandCountAbove, timeElapsedSinceGameStart
+from Trigger import Trigger, playerLevelAbove, locationIs, alwaysTrue, commandCountAbove, timeElapsedSinceGameStart
 from eventAction import Action, printout
 
 def getEventList(game):
     ''' return list of all events '''
     return [
-        Event(Trigger(allwaysTrue), 
+        Event(Trigger(alwaysTrue), 
             Action(printout,'Hey! You can type... this is a good sign.')),
         Event(Trigger(commandCountAbove,game,2),
             Action(printout,"Oh! You're still here! Awesome.")),

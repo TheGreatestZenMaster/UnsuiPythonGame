@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 ### TRIGGER TEMPLATE FUNCTIONS ###
-def allwaysTrue():
+def alwaysTrue():
     return True
 
 # player stats :
