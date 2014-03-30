@@ -1,5 +1,5 @@
 from Inventory import Inventory
-from colorama import Fore as text_color
+from lib.colorama import Fore as text_color
 
 max_level = 100
 

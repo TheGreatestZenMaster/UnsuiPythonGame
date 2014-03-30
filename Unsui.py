@@ -3,15 +3,13 @@
 #----- Set path to library ------#
 import os
 import sys
-sys.path.append( os.path.join(os.getcwd(),'lib'))
-
 
 #----- Unsui imports ------#
 import user_input
 from GameInstance import GameInstance
 
 #----- Library imports -----#
-import colorama 
+import lib.colorama as colorama
 
 colorama.init()
 player_game = GameInstance()
