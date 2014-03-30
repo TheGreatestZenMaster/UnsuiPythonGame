@@ -69,7 +69,7 @@ class UnsuiConfigLoader(object):
         for room in self.unpopulated_rooms:
             for item in room[1]:
                 try:
-                    self.get_by_type_and_name('room', room[0]).contents.append(self.get_by_type_and_name('item', item))
+                    self.get_by_type_and_name('room', room[0]).inventory.add_item(self.get_by_type_and_name('item', item))
                 except ValueError:
                     pass
 

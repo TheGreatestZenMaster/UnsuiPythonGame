@@ -7,14 +7,14 @@
 
 # I may move some of the strings around, e.g. moving the 'extra' ones to 'command'
 WORD_TYPES = {
-    'verb' : ['go', 'use', 'look', 'get', 'check', 'talk', 'take', 'pick', 'listen', 'pet'],
+    'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
     'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'hallway', 'kitchen', 'bedroom'],
     'adjective': ['red'],
     'preposition': ['on', 'under', 'from', 'to', 'behind'],
     'stop': ['the', 'in', 'of'],
     'article': ['a', 'an', 'the'],
-    'command': ['status', 'help', 'exit'],
+    'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map'],
     'extra': ['exit', 'save', 'load', 'reset']
 }
 
@@ -94,7 +94,7 @@ class Parser(object):
 						elif tokens[index][0] == 'verb':
 							break
 						index = index - 1
-				elif token[0] == 'error' or token[0] == 'verb':
+				elif token[0] == 'error':
 					command.object = Object(token[1], 'error')
 
 		elif tokens[0][0] == 'command':
