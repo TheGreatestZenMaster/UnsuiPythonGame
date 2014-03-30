@@ -32,10 +32,12 @@ class basic_class_tests(unittest.TestCase):
             self.assertTrue(res == TEST_RESULTS[i])
         
 def parser_tokenise_test():
+    """Test parser tokenising"""
 
     # Basic tokenising 
     assert_equal(parser.tokenise('use key on door'), [('verb', 'use'), ('noun', 'key'), ('preposition', 'on'), ('noun', 'door')])
     assert_equal(parser.tokenise('pet cat on bed'), [('verb', 'pet'), ('noun', 'cat'), ('preposition', 'on'), ('noun', 'bed')])
+    assert_equal(parser.tokenise('go south'), [('verb', 'go'), ('direction', 'south')])
 
     # Article stripping
     assert_equal(parser.tokenise('go to the hallway'), [('verb', 'go'), ('preposition', 'to'), ('stop', 'the'), ('noun', 'hallway')])
@@ -44,3 +46,45 @@ def parser_tokenise_test():
     # Test Caps and Errors
     assert_equal(parser.tokenise('MAP'), [('command', 'map')])
     assert_equal(parser.tokenise('tHis IS CrAZy'), [('error', 'this'), ('error', 'is'), ('error', 'crazy')])
+
+def parser_classify_test():
+    """Test parser sentence classifying"""
+
+    # Basic classifying (verb, verb+object)
+
+    sentence1 = parser.tokenise('look')
+    sentence2 = parser.tokenise('go to Kitchen')
+
+    command1 = parser.classify(sentence1)
+    command2 = parser.classify(sentence2)
+
+    assert_equal(command1.verb.name, 'look')
+    assert_equal(command1.verb.modifiers, [])
+    assert_equal(command1.object, None)
+
+    assert_equal(command2.verb.name, 'go')
+    assert_equal(command2.verb.modifiers, [])
+    assert_equal(command2.object.name, 'kitchen')
+
+    # Single adjectives
+    sentence1 = parser.tokenise('pet black cat')
+    sentence2 = parser.tokenise('inspect the big window')
+
+    command1 = parser.classify(sentence1)
+    command2 = parser.classify(sentence2)
+
+    assert_equal(command1.verb.name, 'pet')
+    assert_equal(command1.verb.modifiers, [])
+    assert_equal(command1.object.name, 'cat')
+    assert_equal(command1.object.type, 'direct')
+    assert_equal(command1.object.modifiers, ['black'])
+
+    assert_equal(command2.verb.name, 'inspect')
+    assert_equal(command2.verb.modifiers, [])
+    assert_equal(command2.object.name, 'window')
+    assert_equal(command2.object.type, 'direct')
+    assert_equal(command2.object.modifiers, ['big'])
+
+    # Two adjectives
+
+    ### TODO... 

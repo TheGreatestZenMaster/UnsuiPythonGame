@@ -3,12 +3,12 @@
 import unittest
 from random import randrange
 
-from Player import Player, max_level
+from Player.Player import Player, max_level
 
 class basic_leveling_check(unittest.TestCase):
 
     def test_level_growth(self):
-        # tests that all stats are >= those of previous level (for 1st n levels)
+        """ tests that all stats are >= those of previous level (for 1st n levels)"""
         n = 10 # number of levels to test
         
         p1 = Player('p1','elf')
