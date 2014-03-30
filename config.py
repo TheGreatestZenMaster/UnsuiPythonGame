@@ -101,7 +101,7 @@ class UnsuiConfigLoader(object):
         config = UnsuiConfigParser()
 
         # Save rooms
-        for room in self.get_by_type('room'):
+        for room in self.loaded_data['room']:
             config.add_section(room.name)
             config.set(room.name, 'type', 'room')
             config.set(room.name, 'name', room.name)
@@ -111,7 +111,7 @@ class UnsuiConfigLoader(object):
             config.set(room.name, 'contents', ', '.join(room.inventory.list_of_items_by_name()))
 
         # Save items
-        for item in self.get_by_type('item'):
+        for item in self.loaded_data['item']:
             config.add_section(item.name)
             config.set(item.name, 'type', 'item')
             config.set(item.name, 'id', item.id)

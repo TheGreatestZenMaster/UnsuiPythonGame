@@ -104,8 +104,6 @@ class Parser(object):
 		elif tokens[0][0] == 'command' or tokens[0][0] == 'extra':
 			command = Command(Verb(tokens[0][1]))
 
-
-
 		return command
 
 	def tokenise(self, sentence):
