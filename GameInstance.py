@@ -47,7 +47,7 @@ class GameInstance(object):
                 sys.exit()
 
             if command.verb.name == 'look':
-                # call look function of object of look
+                # call look function of object of command
                 if command.object == None:
                     print self.player.current_location.description
                     

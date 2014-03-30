@@ -16,9 +16,7 @@ class Room(object):
         self.exits = exits
 
         self.inventory = Inventory()
-        for item in contents:
-            self.inventory.add_item(item)
-
+        for item in contents: self.inventory.add_item(item)
 
     def on_entering_room(self):
         print "You have entered the %s" % self.name
