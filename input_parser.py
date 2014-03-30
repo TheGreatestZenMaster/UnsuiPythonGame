@@ -7,11 +7,11 @@
 
 # I may move some of the strings around, e.g. moving the 'extra' ones to 'command'
 WORD_TYPES = {
-    'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet'],
+    'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet', 'eat'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
-    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'hallway', 'kitchen', 'bedroom'],
+    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana'],
     'adjective': ['red'],
-    'preposition': ['on', 'under', 'from', 'to', 'behind'],
+    'preposition': ['on', 'under', 'from', 'to', 'behind', 'into'],
     'stop': ['the', 'in', 'of'],
     'article': ['a', 'an', 'the'],
     'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map'],
