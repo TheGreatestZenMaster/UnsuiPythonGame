@@ -1,4 +1,3 @@
-
 import wx
 import os
 import sys
@@ -70,8 +69,16 @@ class MapFrame(wx.Frame):
 
 
     def RunGame(self):
+        """
+        # This process is giving lots of problems. The main issue is that it produces a EOF Error
+        # because of the lack of user input.
         p = subprocess.Popen("Unsui.py", shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE).communicate()
         print p
+        """
+        # If you use the following: It allows you to put input into the bottom textctrl in the GUI before hitting start
+        # and the game will take that input and use it for the first raw input but then fails on the second
+        p = subprocess.Popen("Unsui.py", shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        print p.communicate(self.txtctrl.GetValue(), p)
 
     def StartButton(self, evt):
         self.RunGame()
