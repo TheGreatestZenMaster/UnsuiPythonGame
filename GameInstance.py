@@ -19,19 +19,25 @@ BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are t
 
 
 class GameInstance(object):
-    def __init__(self):
+    def __init__(self, load=False):
         self.GAME_START = datetime.now()
         self.commands_entered = 0
         
         self.actions_available = BASE_ACTIONS
 
-        self.player = Player("NoName", "Male", "Human", None)
-        
         self.parser = Parser()
-
         self.config_loader = UnsuiConfigLoader()
-        self.config_loader.generate()
+
+        if not load:
+
+            self.player = Player("NoName", "Male", "Human", None)
+
+            self.config_loader.generate()
         
+        else:
+            self.config_loader.generate(level='example_save.conf')
+            self.player = self.config_loader.create_player()
+
         self.events = getEventList(self)
 
     #------- Actions Functions --------#
@@ -106,6 +112,12 @@ class GameInstance(object):
 
             if command.verb.name == 'inventory' or command.verb.name == 'bag':
                 print self.player.inventory.list_of_items()
+
+            if command.verb.name == 'save':
+                self.config_loader.save_game(self.player)
+
+            if command.verb.name == 'name':
+                print self.player.name
 
             self.commands_entered += 1
         else:

@@ -14,7 +14,7 @@ WORD_TYPES = {
     'preposition': ['on', 'under', 'from', 'to', 'behind', 'into'],
     'stop': ['the', 'in', 'of'],
     'article': ['a', 'an', 'the'],
-    'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map'],
+    'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map', 'name'],
     'extra': ['save', 'load', 'reset']
 }
 
@@ -101,8 +101,9 @@ class Parser(object):
 				elif token[0] == 'error':
 					command.object = Object(token[1], 'error')
 
-		elif tokens[0][0] == 'command':
+		elif tokens[0][0] == 'command' or tokens[0][0] == 'extra':
 			command = Command(Verb(tokens[0][1]))
+
 		return command
 
 	def tokenise(self, sentence):
