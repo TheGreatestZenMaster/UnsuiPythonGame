@@ -95,7 +95,7 @@ class UnsuiConfigLoader(object):
                 pass
         else:
             raise ValueError('Cannot find '+str(type)+' '+str(name))
-            
+
     def save_game(self, player):
 
         config = UnsuiConfigParser()
