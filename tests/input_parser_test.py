@@ -87,4 +87,12 @@ def parser_classify_test():
 
     # Two adjectives
 
-    ### TODO... 
+    sentence1 = parser.tokenise('look under big sturdy desk')
+
+    command1 = parser.classify(sentence1)
+
+    assert_equal(command1.verb.name, 'look')
+    assert_equal(command1.verb.modifiers, [])
+    assert_equal(command1.object.name, 'desk')
+    assert_equal(command1.object.type, 'direct')
+    assert_equal(command1.object.modifiers, ['sturdy', 'big'])

@@ -10,7 +10,7 @@ WORD_TYPES = {
     'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet', 'eat'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
     'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana'],
-    'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small'],
+    'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small', 'sturdy'],
     'preposition': ['on', 'under', 'from', 'to', 'behind', 'into'],
     'stop': ['the', 'in', 'of'],
     'article': ['a', 'an', 'the'],
@@ -89,7 +89,7 @@ class Parser(object):
 					object = Object(token[1], 'direct')
 					command.object = object
 
-					# Check for Adjective + Prepositions:
+					# Check for Adjectives
 					index = tokens.index(token) - 1
 					while True:
 						if tokens[index][0] == 'adjective':
