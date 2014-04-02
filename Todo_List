@@ -1,0 +1,32 @@
+# Unsui todo list:
+
+*Actions that the player can take:
+    -For example: Shower, eat, dress so on
+
+*Enhanced Player Status:
+    -To facilitate the player choosing to take actions:
+        >Hunger status:
+            +Gives Prompt: "Oh boy are you hungy! You should eat!"
+        >If player needs to go outside but isnt wearing any clothing:
+            +Gives Prompt: "Are you sure you want to go out nude?"
+        > etc.
+        
+*More advanced Player Inventory:
+    -Including:
+        >Clothing worn
+            +This should make sure there is only one article per body part
+        >Pockets
+            +This should change from none when nude to how many are available when things are equipped
+
+*Quests:
+    -First World:
+        >shower
+        >dress
+        >eat
+        >find something or another
+        
+*Ability to look inside things:
+    -When getting dressed:
+        >Look in dressers
+    -When trying to eat
+        >look inside fridge
