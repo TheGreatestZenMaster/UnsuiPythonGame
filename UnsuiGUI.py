@@ -1,8 +1,8 @@
-__author__ = 'Jake'
-
 import wx
 import os
 import sys
+from wx.py.shell import Shell as PyShell
+import wx.stc
 
 class UnsuiGUI(wx.App):
     def OnInit(self):
@@ -12,73 +12,59 @@ class UnsuiGUI(wx.App):
 
         return True
 
-
-class RedirectText:
-    def __init__(self, aWxTextCtrl):
-        self.out = aWxTextCtrl
-
-    def write(self, string):
-        self.out.WriteText(string)
-
-
 class MapFrame(wx.Frame):
     def __init__(self, parent, id=wx.ID_ANY, title="", pos=wx.DefaultPosition,
-                 size=(700, 500), style=wx.SYSTEM_MENU|wx.CAPTION|wx.CLOSE_BOX, name="Frame"):
+                 size=(900, 500), style=wx.SYSTEM_MENU|wx.CAPTION|wx.CLOSE_BOX, name="Frame"):
         super(MapFrame, self).__init__(parent, id, title, pos, size, style, name)
 
         # Attributes
         self.panel = wx.Panel(self, id=wx.ID_ANY, pos=wx.DefaultPosition,
-                              size=(500, 500), style=wx.NO_BORDER|wx.EXPAND, name="")
+                              size=(900, 500), style=wx.EXPAND, name="")
 
         vsizer = wx.BoxSizer(wx.HORIZONTAL)
         mapsizer = wx.BoxSizer(wx.VERTICAL)
         textsizer = wx.BoxSizer(wx.VERTICAL)
 
-        img_path = os.path.abspath("./apartmentdesign.jpg")
+        img_path = os.path.abspath("./UnsuiGUI/apartmentdesign.jpg")
         bitmap = wx.Bitmap(img_path, type=wx.BITMAP_TYPE_JPEG)
         img = wx.StaticBitmap(self.panel, wx.ID_ANY, bitmap=bitmap)
 
         start_button = wx.Button(self.panel, label="Start")
-        start_button.Bind(wx.EVT_BUTTON, self.StartButton)
+        load_button = wx.Button(self.panel, label="Load")
         end_button = wx.Button(self.panel, label="Quit")
+        start_button.Bind(wx.EVT_BUTTON, self.OnStart)
+        load_button.Bind(wx.EVT_BUTTON, self.OnLoad)
         end_button.Bind(wx.EVT_BUTTON, self.QuitButton)
 
-        self.txtctrl = wx.TextCtrl(self.panel)
-        self.statictext = wx.TextCtrl(self.panel, style=wx.TE_READONLY|wx.TE_MULTILINE)
+        self.shell = PyShell(self.panel, -1, size=(400, -1))
+        self.shell.clear()
+        self.shell.SetLexer(wx.stc.STC_LEX_NULL)
+        self.shell.redirectStdin(True)
+        self.shell.redirectStdout(True)
+        self.shell.SetInsertionPointEnd()
 
-        self.txtctrl.Bind(wx.EVT_TEXT_ENTER, self.OnEnter)
-
-        textsizer.Add(self.statictext, 5, wx.EXPAND, 5)
-        textsizer.Add(self.txtctrl, 5, wx.EXPAND, 5)
+        textsizer.Add(self.shell, 5, wx.EXPAND | wx.TE_MULTILINE, 5)
         mapsizer.Add(img, 5, wx.EXPAND | wx.ALIGN_CENTER, 5)
 
         mapsizerbuttonsizer = wx.BoxSizer(wx.HORIZONTAL)
         mapsizerbuttonsizer.Add(start_button, 5, wx.ALIGN_LEFT, 5)
+        mapsizerbuttonsizer.Add(load_button, 5, wx.ALIGN_LEFT, 5)
         mapsizerbuttonsizer.Add(end_button, 5, wx.ALIGN_LEFT, 5)
 
         mapsizer.Add(mapsizerbuttonsizer, 0, wx.EXPAND|wx.ALIGN_CENTER, 5)
-        vsizer.Add(mapsizer, 0, wx.EXPAND|wx.ALIGN_LEFT, 5)
-        vsizer.Add(textsizer, 0, wx.EXPAND|wx.ALIGN_RIGHT, 5)
+        vsizer.Add(mapsizer, 0, wx.EXPAND | wx.ALIGN_LEFT, 5)
+        vsizer.Add(textsizer, 0, wx.EXPAND | wx.ALIGN_RIGHT, 5)
 
         self.panel.SetSizer(vsizer)
 
-        self.redir=RedirectText(self.statictext)
-        sys.stdout=self.redir
+    def OnStart(self, evt):
+        self.shell.execStartupScript("Unsui.py")
 
-    def OnEnter(self, evt):
-        self.txtctrl.GetValue()
-
-
-    def RunGame(self):
-        os.system("Unsui.py")
-
-
-    def StartButton(self, evt):
-        self.RunGame()
+    def OnLoad(self, evt):
+        self.shell.Execute("load")
 
     def QuitButton(self, evt):
         sys.exit()
-
 
 app = UnsuiGUI(0)
 app.MainLoop()
