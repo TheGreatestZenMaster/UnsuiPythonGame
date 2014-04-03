@@ -2,6 +2,7 @@ import wx
 import os
 import sys
 from wx.py.shell import Shell as PyShell
+import wx.stc
 
 class UnsuiGUI(wx.App):
     def OnInit(self):
@@ -35,6 +36,7 @@ class MapFrame(wx.Frame):
 
         self.shell = PyShell(self.panel, -1, size=(400, -1))
         self.shell.clear()
+        self.shell.SetLexer(wx.stc.STC_LEX_NULL)
         self.shell.redirectStdin(True)
         self.shell.redirectStdout(True)
 
@@ -52,7 +54,8 @@ class MapFrame(wx.Frame):
         self.panel.SetSizer(vsizer)
 
     def OnStart(self, evt):
-        self.shell.execStartupScript("Unsui.py")
+        game = "Unsui.py"
+        self.shell.execStartupScript(game)
 
     def QuitButton(self, evt):
         sys.exit()
