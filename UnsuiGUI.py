@@ -25,13 +25,15 @@ class MapFrame(wx.Frame):
         mapsizer = wx.BoxSizer(wx.VERTICAL)
         textsizer = wx.BoxSizer(wx.VERTICAL)
 
-        img_path = os.path.abspath("./apartmentdesign.jpg")
+        img_path = os.path.abspath("./UnsuiGUI/apartmentdesign.jpg")
         bitmap = wx.Bitmap(img_path, type=wx.BITMAP_TYPE_JPEG)
         img = wx.StaticBitmap(self.panel, wx.ID_ANY, bitmap=bitmap)
 
         start_button = wx.Button(self.panel, label="Start")
+        load_button = wx.Button(self.panel, label="Load")
         end_button = wx.Button(self.panel, label="Quit")
         start_button.Bind(wx.EVT_BUTTON, self.OnStart)
+        load_button.Bind(wx.EVT_BUTTON, self.OnLoad)
         end_button.Bind(wx.EVT_BUTTON, self.QuitButton)
 
         self.shell = PyShell(self.panel, -1, size=(400, -1))
@@ -39,12 +41,14 @@ class MapFrame(wx.Frame):
         self.shell.SetLexer(wx.stc.STC_LEX_NULL)
         self.shell.redirectStdin(True)
         self.shell.redirectStdout(True)
+        self.shell.SetInsertionPointEnd()
 
         textsizer.Add(self.shell, 5, wx.EXPAND | wx.TE_MULTILINE, 5)
         mapsizer.Add(img, 5, wx.EXPAND | wx.ALIGN_CENTER, 5)
 
         mapsizerbuttonsizer = wx.BoxSizer(wx.HORIZONTAL)
         mapsizerbuttonsizer.Add(start_button, 5, wx.ALIGN_LEFT, 5)
+        mapsizerbuttonsizer.Add(load_button, 5, wx.ALIGN_LEFT, 5)
         mapsizerbuttonsizer.Add(end_button, 5, wx.ALIGN_LEFT, 5)
 
         mapsizer.Add(mapsizerbuttonsizer, 0, wx.EXPAND|wx.ALIGN_CENTER, 5)
@@ -54,12 +58,13 @@ class MapFrame(wx.Frame):
         self.panel.SetSizer(vsizer)
 
     def OnStart(self, evt):
-        game = "Unsui.py"
-        self.shell.execStartupScript(game)
+        self.shell.execStartupScript("Unsui.py")
+
+    def OnLoad(self, evt):
+        self.shell.Execute("load")
 
     def QuitButton(self, evt):
         sys.exit()
-
 
 app = UnsuiGUI(0)
 app.MainLoop()
