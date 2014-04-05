@@ -1,14 +1,16 @@
 from Player.Inventory import Inventory
 class Item(object):
 	"""Base item class"""
-	def __init__(self, id, name, description, contents=False):
+	def __init__(self, id, name, description, contents=None):
 		self.id = id
 		self.name = name
 		self.description = description
-
-		if contents != False:
+		if contents == None:
+			self.inventory = False
+		else:
 			self.inventory = Inventory()
-        	for item in contents: self.inventory.add_item(item)
+			for item in contents:
+				self.inventory.add_item(item)
 
 	
 	# Base methods
@@ -18,5 +20,4 @@ class Item(object):
 		print self.description
 
 	def look_in(self):
-		if self.inventory:
-			print self.inventory.list_of_items()
+		print "%s contain: " % self.name, self.inventory.list_of_items()
