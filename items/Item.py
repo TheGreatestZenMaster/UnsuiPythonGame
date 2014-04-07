@@ -1,4 +1,6 @@
 from Player.Inventory import Inventory
+
+
 class Item(object):
 	"""Base item class"""
 	def __init__(self, id, name, description, contents=None):

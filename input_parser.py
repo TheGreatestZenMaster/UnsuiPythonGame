@@ -10,6 +10,7 @@ WORD_TYPES = {
     'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet', 'eat'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
     'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'dressers', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana'],
+    'pronoun': ['me', 'you', 'him', 'her', 'it', 'them'],
     'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small', 'sturdy'],
     'adverb': [],
     'preposition': ['on', 'under', 'from', 'to', 'behind', 'into', 'in'],
@@ -31,8 +32,9 @@ class Command(object):
 		self.object = None
 
 class Verb(object):
-	def __init__(self, name):
+	def __init__(self, name, type):
 		self.name = name
+		self.type = type
 		self.modifiers = []
 
 class Object(object):
@@ -84,7 +86,7 @@ class Parser(object):
 		if tokens == []:
 			return command
 		if tokens[0][0] == 'verb':
-			command = Command(Verb(tokens[0][1]))
+			command = Command(Verb(tokens[0][1], 'normal'))
 			for token in tokens[0:]:
 				
 				if token[0] == 'noun':
@@ -109,7 +111,7 @@ class Parser(object):
 					command.object = Object(token[1], 'error')
 
 		elif tokens[0][0] == 'command' or tokens[0][0] == 'extra':
-			command = Command(Verb(tokens[0][1]))
+			command = Command(Verb(tokens[0][1], 'command'))
 
 		return command
 
@@ -123,3 +125,7 @@ class Parser(object):
 	def parse(self, sentence):
 		"""Takes a sentence and returns a Command object"""
 		return self.classify(self.tokenise(sentence))
+
+if __name__ == '__main__':
+    for key,value in VOCABULARY.items():
+    	print key + ": " + value
