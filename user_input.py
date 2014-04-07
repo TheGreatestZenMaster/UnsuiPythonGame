@@ -1,4 +1,6 @@
 from input_parser import Parser
+from lib.colorama import Fore
+
 import sys
 
 default_input = raw_input
@@ -9,8 +11,10 @@ def request_action(game,input=default_input):
     Returns requested user action.
     '''
     
-    print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
-                                                            game.actions_available)
+    print("Your available actions while in the "
+        +Fore.GREEN+"{}".format(game.player.current_location.name)
+        +Fore.RESET+" are:\n"
+        +Fore.CYAN+"{}".format(game.actions_available))
     return input("What do you want to do? ")
     
 

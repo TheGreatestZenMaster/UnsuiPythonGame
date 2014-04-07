@@ -2,9 +2,11 @@
 Action class for events. 
 '''
 
+from lib.colorama import Fore
+
 ### ACTIONS ###
 def printout(text,remove=True):
-    print text
+    print(Fore.MAGENTA+text)
     
     
 

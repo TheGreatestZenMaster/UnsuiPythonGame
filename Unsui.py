@@ -11,7 +11,7 @@ from GameInstance import GameInstance
 #----- Library imports -----#
 import lib.colorama as colorama
 
-colorama.init()
+colorama.init(autoreset=True)
 player_game = GameInstance()
 
 def upper_main(player_game, input=raw_input, load=False):
