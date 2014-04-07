@@ -19,12 +19,9 @@ from GameInstance import GameInstance
 #----- Library imports -----#
 import lib.colorama as colorama
 
-<<<<<<< HEAD
 colorama.init(autoreset=True)
 player_game = GameInstance()
-=======
-colorama.init()
->>>>>>> prepositional_phrases
+
 
 def upper_main(player_game, input=raw_input, load=False):
     """
@@ -53,11 +50,7 @@ def splash_screen():
         if input_string == 'load' or input_string == 'l':
             player_game = GameInstance(load="example_save.conf")
             upper_main(player_game, load=True)
-<<<<<<< HEAD
-        if input_string == 'start':
-=======
         if input_string == 'start' or input_string == 's':
->>>>>>> prepositional_phrases
             player_game = GameInstance()
             upper_main(player_game)
         else:
