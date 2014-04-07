@@ -20,7 +20,7 @@ def locationIs(game,loc):
     
 # game stats :
 def commandCountAbove(game,number):
-    return game.commands_entered < number
+    return game.commands_entered > number
 
 def timeElapsedSinceGameStart(game,timeDelta):
     return (datetime.now() - game.GAME_START) > timeDelta
