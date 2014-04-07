@@ -77,13 +77,13 @@ def parser_classify_test():
     assert_equal(command1.verb.modifiers, [])
     assert_equal(command1.object.name, 'cat')
     assert_equal(command1.object.type, 'direct')
-    assert_equal(command1.object.modifiers, ['black'])
+    assert_equal(command1.object.adjectival_modifiers, ['black'])
 
     assert_equal(command2.verb.name, 'inspect')
     assert_equal(command2.verb.modifiers, [])
     assert_equal(command2.object.name, 'window')
     assert_equal(command2.object.type, 'direct')
-    assert_equal(command2.object.modifiers, ['big'])
+    assert_equal(command2.object.adjectival_modifiers, ['big'])
 
     # Two adjectives
 
@@ -94,5 +94,5 @@ def parser_classify_test():
     assert_equal(command1.verb.name, 'look')
     assert_equal(command1.verb.modifiers, [])
     assert_equal(command1.object.name, 'desk')
-    assert_equal(command1.object.type, 'direct')
-    assert_equal(command1.object.modifiers, ['sturdy', 'big'])
+    assert_equal(command1.object.type, 'prepositional_phrase')
+    assert_equal(command1.object.adjectival_modifiers, ['sturdy', 'big'])
