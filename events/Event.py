@@ -28,7 +28,7 @@ class Event(object):
         self.completed = True
 
     def get_event_name(self):
-        return self.trigger.function
+        return self.trigger.function.__name__
             
     def trigger(self):
         raise NotImplementedError('Abstract method "trigger" should be implemented by subclass')

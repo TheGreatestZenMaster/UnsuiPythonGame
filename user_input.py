@@ -52,7 +52,7 @@ def get_events_list(game):
         print("You have the following quests")
         for event in game.events:
             if event.initiated and not event.completed:
-                print(event.get_event_name().__name__)
+                print(event.get_event_name())
 
 #------Help function ------#
 def help_info(input=default_input):
