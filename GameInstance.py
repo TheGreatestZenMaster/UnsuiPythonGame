@@ -13,7 +13,7 @@ from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
 from input_parser import Parser
-from make_events import getEventList
+from events.make_events import getEventList
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are the actions which should always be available.
 
