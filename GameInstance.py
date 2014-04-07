@@ -15,6 +15,7 @@ import user_input
 from input_parser import Parser
 from events.make_events import getEventList
 from quests.first_quest import first_quest
+from lib.colorama import Fore
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help", "quests"] # these are the actions which should always be available.
 
@@ -63,7 +64,6 @@ class GameInstance(object):
         # This means you can call commands with 2 words, e.g. 'look desk'
 
         # TODO:
-        #   - Reimplement other archived commands.
         #   - Move this code to user_input maybe
 
         if command:
@@ -83,7 +83,11 @@ class GameInstance(object):
             if command.verb.name == 'go':
                 if command.object != None:
                     try:
-                        self.player.current_location = self.config_loader.get_by_type_and_name('room', command.object.name)
+                        target_room = self.config_loader.get_by_type_and_name('room', command.object.name)
+                        if target_room.name in self.player.current_location.exits:
+                            self.player.current_location = target_room
+                        else:
+                            print 'Cannot go to '+Fore.GREEN+"{}".format(target_room.name)
                     except ValueError as err:
                         if err.message[0:16] == 'Cannot find room':
                             print err.message

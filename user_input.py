@@ -57,17 +57,11 @@ def get_events_list(game):
 #------Help function ------#
 def help_info(input=default_input):
     """Provides a information about the available prompts should the player need it"""
-    help_info_dict = {"enter": "This command will move your character into the next room.",
+    help_info_dict = {"go": "This command will move your character to another room of your choice.",
                       "exit": "This command exits the game! Careful!",
                       "stats": "This command provides you with info about your character.",
-                      "grab": "This command lets you grab any object. Simply say which one.",
-                      "leave": "This command lets you leave through any unlocked door",
-                      "doors": "This command shows you what doors are visible.",
-                      "keys": "This command show you any keys you can see.",
                       "location": "This command tells you your current location.",
-                      "fight": "This command lets you fight the monster",
                       "help": "show this menu",
-                      "go": "Travel to a room of your choice"
                       }
     while True:
         info_choice = input("What would you like to know more about? ('back' returns you to the prompt)").lower()
