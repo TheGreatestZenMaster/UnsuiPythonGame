@@ -30,14 +30,14 @@ class GameInstance(object):
         self.parser = Parser()
         self.config_loader = UnsuiConfigLoader()
 
-        if not load:
+        if load == False:
 
             self.player = Player("NoName", "Male", "Human", None)
 
             self.config_loader.generate()
         
         else:
-            self.config_loader.generate(level='example_save.conf')
+            self.config_loader.generate(load)
             self.player = self.config_loader.create_player()
 
         self.events = getEventList(self)

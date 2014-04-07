@@ -49,7 +49,6 @@ class UnsuiConfigLoader(object):
                 self.unpopulated_rooms.append([self.config.get(section, "name"), self.config.getlist(section, "contents")])
                 contents_list = []
                 break
-                
         return Room(self.config.get(section, "name"), self.config.get(section, "description"), self.config.getlist(section, "exits"), contents_list)
 
     def create_item(self, section):
@@ -62,7 +61,7 @@ class UnsuiConfigLoader(object):
 
     def generate(self, level=False):
         """Traverses directory looking for .conf files and loads data from them"""
-        if not level:
+        if level == False:
             directory = os.path.dirname(os.path.realpath(__file__))
             for root, dirs, files in os.walk(directory):
                 for file in files:
