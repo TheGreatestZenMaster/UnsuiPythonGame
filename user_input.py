@@ -1,4 +1,6 @@
 from input_parser import Parser
+from lib.colorama import Fore
+
 import sys
 
 default_input = raw_input
@@ -9,8 +11,10 @@ def request_action(game,input=default_input):
     Returns requested user action.
     '''
     
-    print "Your available actions while in the %s are %s" % (game.player.current_location.name, 
-                                                            game.actions_available)
+    print("Your available actions while in the "
+        +Fore.GREEN+"{}".format(game.player.current_location.name)
+        +Fore.RESET+" are:\n"
+        +Fore.CYAN+"{}".format(game.actions_available))
     return input("What do you want to do? ")
     
 
@@ -40,6 +44,15 @@ def opening_setup(game, input=default_input):
                    "Its a bright new day! Lets get to it!".format(game.player.get_name())
     print opening_text
     game.player.level_up() 
+
+def get_events_list(game):
+        '''
+        Prints out the list of current initiated events
+        '''
+        print("You have the following quests")
+        for event in game.events:
+            if event.initiated and not event.completed:
+                print(event.get_event_name())
 
 #------Help function ------#
 def help_info(input=default_input):

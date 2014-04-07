@@ -14,7 +14,7 @@ WORD_TYPES = {
     'preposition': ['on', 'under', 'from', 'to', 'behind', 'into'],
     'stop': ['the', 'in', 'of'],
     'article': ['a', 'an', 'the'],
-    'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map', 'name'],
+    'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map', 'name', 'quests'],
     'extra': ['save', 'load', 'reset']
 }
 

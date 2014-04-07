@@ -1,4 +1,5 @@
 from Unsui import *
+from GameInstance import GameInstance
 
 import unittest
 import string
@@ -21,4 +22,4 @@ class doesItRun(unittest.TestCase):
 
     @raises(SystemExit)  # because of systemExit
     def exit_upper_main_test(self):
-        upper_main(player_game, input=alwaysExit)
+        upper_main(player_game=GameInstance(), input=alwaysExit)

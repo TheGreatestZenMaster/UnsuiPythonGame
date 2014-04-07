@@ -19,7 +19,7 @@ from GameInstance import GameInstance
 #----- Library imports -----#
 import lib.colorama as colorama
 
-colorama.init()
+colorama.init(autoreset=True)
 player_game = GameInstance()
 
 def upper_main(player_game, input=raw_input, load=False):
@@ -38,21 +38,25 @@ def upper_main(player_game, input=raw_input, load=False):
             command = player_game.parser.parse(user_action)
             player_game.take_action(command)
             player_game.check_events()
-
-#------- Game Operation --------#
-if __name__ == '__main__':
-
-    # This is temporary to test save/load functionality
+            
+def splash_screen():
+    '''
+    display a simple splash screen which asks user to load/start game.
+    '''
     while True:
-        # "Splash Screen"
-        print "Load existing game or start new game?"
+        print '"Load" existing game or "start" new game?'
         input_string = raw_input("load/start? ")
         if input_string == 'load':
             player_game = GameInstance(load="example_save.conf")
             upper_main(player_game, load=True)
         if input_string == 'start':
+            player_game = GameInstance()
             upper_main(player_game)
         else:
             print "Please enter \"load\" or \"start\""
+
+#------- Game Operation --------#
+if __name__ == '__main__':
+    splash_screen()
 
     
