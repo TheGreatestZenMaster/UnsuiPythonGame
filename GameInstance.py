@@ -37,8 +37,10 @@ class GameInstance(object):
             self.config_loader.generate()
         
         else:
-            self.config_loader.generate(load)
-            self.player = self.config_loader.create_player()
+            pass
+            # Deprecated, will be replaced by Pickle. Leave here.
+            #self.config_loader.generate(load)
+            #self.player = self.config_loader.create_player()
 
         self.events = getEventList(self)
         self.events.append(first_quest(self))

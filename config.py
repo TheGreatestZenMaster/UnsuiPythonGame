@@ -99,6 +99,10 @@ class UnsuiConfigLoader(object):
         else:
             raise ValueError('Cannot find '+str(type)+' '+str(name))
 
+
+
+    # Deprecated Code, leave here for now.
+    # Pickle will be implemented soon to handle load/save functionality
     def save_game(self, player):
 
         config = UnsuiConfigParser()
