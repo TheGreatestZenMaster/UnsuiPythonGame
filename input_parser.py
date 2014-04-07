@@ -11,6 +11,7 @@ WORD_TYPES = {
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
     'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'dressers', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana'],
     'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small', 'sturdy'],
+    'adverb': [],
     'preposition': ['on', 'under', 'from', 'to', 'behind', 'into', 'in'],
     'stop': ['the', 'of'],
     'article': ['a', 'an', 'the'],
