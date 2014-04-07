@@ -36,7 +36,7 @@ def splash_screen():
     display a simple splash screen which asks user to load/start game.
     '''
     while True:
-        print "Load existing game or start new game?"
+        print '"Load" existing game or "start" new game?'
         input_string = raw_input("load/start? ")
         if input_string == 'load':
             player_game = GameInstance(load="example_save.conf")
