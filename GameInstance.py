@@ -16,7 +16,7 @@ from input_parser import Parser
 from events.make_events import getEventList
 from quests.first_quest import first_quest
 
-BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are the actions which should always be available.
+BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help", "quests"] # these are the actions which should always be available.
 
 
 class GameInstance(object):
@@ -105,6 +105,9 @@ class GameInstance(object):
                 print ' ### GAME STATS ### '
                 print 'game started : ', self.GAME_START
                 print 'commands entered : ', self.commands_entered
+
+            if command.verb.name == 'quests':
+                user_input.get_events_list(self)
 
             if command.verb.name == 'help':
                 user_input.help_info()

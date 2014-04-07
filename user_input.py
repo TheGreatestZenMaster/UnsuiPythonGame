@@ -45,6 +45,15 @@ def opening_setup(game, input=default_input):
     print opening_text
     game.player.level_up() 
 
+def get_events_list(game):
+        '''
+        Prints out the list of current initiated events
+        '''
+        print("You have the following quests")
+        for event in game.events:
+            if event.initiated and not event.completed:
+                print(event.get_event_name().__name__)
+
 #------Help function ------#
 def help_info(input=default_input):
     """Provides a information about the available prompts should the player need it"""
