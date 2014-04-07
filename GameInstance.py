@@ -66,6 +66,7 @@ class GameInstance(object):
         # TODO:
         #   - Move this code to user_input maybe
 
+
         if command:
             if command.verb.name == 'exit':
                 sys.exit()
@@ -77,6 +78,11 @@ class GameInstance(object):
                     
                 elif command.object.type == 'error':
                     print "I don't understand %s" % command.object.name
+
+                elif 'in' in command.object.prepositional_modifiers:
+
+                    self.config_loader.get_by_type_and_name('item', command.object.name).look_in()
+
                 else:    # If there is no object of look it will print the current room's description
                     self.config_loader.get_by_type_and_name('item', command.object.name).look()
 

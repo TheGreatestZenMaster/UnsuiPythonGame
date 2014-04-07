@@ -9,10 +9,11 @@
 WORD_TYPES = {
     'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet', 'eat'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
-    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana'],
+    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'dressers', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana'],
     'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small', 'sturdy'],
-    'preposition': ['on', 'under', 'from', 'to', 'behind', 'into'],
-    'stop': ['the', 'in', 'of'],
+    'adverb': [],
+    'preposition': ['on', 'under', 'from', 'to', 'behind', 'into', 'in'],
+    'stop': ['the', 'of'],
     'article': ['a', 'an', 'the'],
     'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map', 'name', 'quests'],
     'extra': ['save', 'load', 'reset']
@@ -38,7 +39,8 @@ class Object(object):
 	def __init__(self, name, type):
 		self.name = name
 		self.type = type
-		self.modifiers = []
+		self.adjectival_modifiers = []
+		self.prepositional_modifiers = []
 
 class Parser(object):
 	"""
@@ -93,10 +95,15 @@ class Parser(object):
 					index = tokens.index(token) - 1
 					while True:
 						if tokens[index][0] == 'adjective':
-							object.modifiers.append(tokens[index][1])
+							object.adjectival_modifiers.append(tokens[index][1])
+						if tokens[index][0] == 'preposition':
+							object.type = 'prepositional_phrase'
+							object.prepositional_modifiers.append(tokens[index][1])
+
 						elif tokens[index][0] == 'verb':
 							break
 						index = index - 1
+
 
 				elif token[0] == 'error':
 					command.object = Object(token[1], 'error')

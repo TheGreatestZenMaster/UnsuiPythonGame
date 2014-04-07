@@ -54,7 +54,11 @@ class UnsuiConfigLoader(object):
 
     def create_item(self, section):
         """Returns a Item instance."""
-        return Item(self.config.get(section, "id"), self.config.get(section, "name"), self.config.get(section, "description"))
+        try:
+            a = self.config.getlist(section, "contents")
+            return Item(self.config.get(section, "id"), self.config.get(section, "name"), self.config.get(section, "description"), contents=a)
+        except:
+            return Item(self.config.get(section, "id"), self.config.get(section, "name"), self.config.get(section, "description"))
 
     def generate(self, level=False):
         """Traverses directory looking for .conf files and loads data from them"""
