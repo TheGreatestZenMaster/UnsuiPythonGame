@@ -14,10 +14,11 @@ class Story(object):
         eventList = sequence of Event objects which take place sequentially from eventList[0] to eventList[n]
         '''
         self.current_event = None
+        self.initiated = None
+        self.completed = None
 
         self.eventList = eventList[::-1] # reverse the list so we can pop off the end (which is now the first item)
         self.next_event()
-
             
     def next_event(self):
         '''
@@ -25,8 +26,13 @@ class Story(object):
         '''
         try:
             self.current_event   = self.eventList.pop()        
+            self.initiated = self.current_event.initiated
+            self.completed = self.current_event.completed
         except IndexError: # catch attempt to pop empty list
             return True # Story is over
+        
+    def get_event_name(self):
+        return self.current_event.get_event_name()
         
     def check(self):
         ''' checks the event for trigger condition satisfied '''
