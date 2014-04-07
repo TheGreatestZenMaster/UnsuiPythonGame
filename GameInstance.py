@@ -14,6 +14,7 @@ from config import UnsuiConfigLoader
 import user_input
 from input_parser import Parser
 from events.make_events import getEventList
+from quests.first_quest import first_quest
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help"] # these are the actions which should always be available.
 
@@ -39,6 +40,7 @@ class GameInstance(object):
             self.player = self.config_loader.create_player()
 
         self.events = getEventList(self)
+        self.events.append(first_quest(self))
 
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
