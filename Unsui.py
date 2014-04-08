@@ -14,7 +14,7 @@ import sys
 
 #----- Unsui imports ------#
 import user_input
-from GameInstance import GameInstance
+from GameInstance import GameInstance, DEFAULT_SAVE_FILE
 from send_data import invalid_input
 
 #----- Library imports -----#
@@ -23,16 +23,12 @@ import lib.colorama as colorama
 colorama.init(autoreset=True)
 
 
-def upper_main(player_game, input=raw_input, load=False):
+def upper_main(player_game, input=raw_input):
     """
     This loop should never exit.
     Exception: if the player specifies to exit
     """
-
-    if not load:
-        user_input.opening_setup(player_game,input)
     while True:
-
         user_action = user_input.request_action(player_game,input)
         if not user_action == "":
 		    # Commands are interpreted after being parsed into a Command object
@@ -48,16 +44,15 @@ def splash_screen():
         print '"Load" existing game or "start" new game?'
         input_string = raw_input("load/start? ")
         if input_string == 'load' or input_string == 'l':
-            player_game = GameInstance(load="example_save.conf")
-            upper_main(player_game, load=True)
-        if input_string == 'start' or input_string == 's':
+            player_game = GameInstance(load=DEFAULT_SAVE_FILE)
+            upper_main(player_game)
+        elif input_string == 'start' or input_string == 's':
             player_game = GameInstance()
             upper_main(player_game)
         else:
             invalid_input("Please enter \"load\" or \"start\"",
                 input_string=input_string,
                 tag='bad load/save choice') 
-            print 
 
 #------- Game Operation --------#
 if __name__ == '__main__':

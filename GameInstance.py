@@ -4,6 +4,7 @@ Think of it like a giant game container in which everything goes.
 '''
 import sys
 from datetime import datetime
+import pickle
 
 from items.Key import Key
 from items.Door import Door
@@ -19,32 +20,26 @@ from lib.colorama import Fore
 from send_data import invalid_input
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help", "quests"] # these are the actions which should always be available.
-
+DEFAULT_SAVE_FILE = 'unsui_default.save'
 
 class GameInstance(object):
     def __init__(self, load=False):
-        self.GAME_START = datetime.now()
-        self.commands_entered = 0
-        
-        self.actions_available = BASE_ACTIONS
-
-        self.parser = Parser()
-        self.config_loader = UnsuiConfigLoader()
-
         if load == False:
-
-            self.player = Player("NoName", "Male", "Human", None)
-
-            self.config_loader.generate()
-        
+            # define attributes: #
+            self.player = Player("NoName", "Male", "Human", None)           
+            self.parser = Parser()
+            self.config_loader = UnsuiConfigLoader()
+            self.GAME_START = datetime.now()
+            self.commands_entered = 0
+            self.actions_available = BASE_ACTIONS
+            self.events = getEventList(self)
+            
+            # call set up functions: #
+            self.config_loader.generate()    
+            user_input.opening_setup(self)
+            self.events.append(first_quest(self))            
         else:
-            pass
-            # Deprecated, will be replaced by Pickle. Leave here.
-            #self.config_loader.generate(load)
-            #self.player = self.config_loader.create_player()
-
-        self.events = getEventList(self)
-        self.events.append(first_quest(self))
+            self.load_game(load)
 
     #------- Actions Functions --------#
     def generate_rooms_dict(self):
@@ -60,6 +55,37 @@ class GameInstance(object):
         for event in self.events:
             if event.check():
                 self.events.remove(event)
+                
+    def load_game(self,fname):
+        with open(fname, 'rb') as f:
+            newgame = pickle.load(f)
+            self.set(newgame)
+            del newgame
+        # Deprecated, replaced by Pickle. Leave here.
+        #self.config_loader.generate(load)
+        #self.player = self.config_loader.create_player()
+        
+    def set(self,game):
+        '''sets all attributes in this game equal to those of given game'''
+        self.player = game.player
+        self.parser = game.parser
+        self.config_loader = game.config_loader
+        self.GAME_START = game.GAME_START
+        self.commands_entered = game.commands_entered
+        self.actions_available = game.actions_available
+        self.events = game.events
+        
+                
+    def save_game(self,fname=DEFAULT_SAVE_FILE):
+        with open(fname,'wb') as f:
+            pickle.dump(self,f,pickle.HIGHEST_PROTOCOL)
+        # Deprecated, replaced by Pickle. Leave here.
+        #self.config_loader.save_game(self.player)
+        
+    def exit_game(self,save=True):
+        if save==True:
+            self.save_game()
+        sys.exit()
 
     def take_action(self, command, input=user_input.default_input):
 
@@ -72,7 +98,7 @@ class GameInstance(object):
 
         if command:
             if command.verb.name == 'exit':
-                sys.exit()
+                self.exit_game()
 
             if command.verb.name == 'look':
                 # call look function of object of command
@@ -141,7 +167,7 @@ class GameInstance(object):
                 print self.player.inventory.list_of_items()
 
             if command.verb.name == 'save':
-                self.config_loader.save_game(self.player)
+                self.save_game()
 
             if command.verb.name == 'name':
                 print self.player.name
