@@ -40,7 +40,7 @@ def parser_tokenise_test():
     assert_equal(parser.tokenise('go south'), [('verb', 'go'), ('direction', 'south')])
 
     # Article stripping
-    assert_equal(parser.tokenise('go to the hallway'), [('verb', 'go'), ('preposition', 'to'), ('stop', 'the'), ('noun', 'hallway')])
+    assert_equal(parser.tokenise('go to the hallway'), [('verb', 'go'), ('preposition', 'to'), ('article', 'the'), ('noun', 'hallway')])
     assert_equal(parser.tokenise('eat a banana'), [('verb', 'eat'), ('noun', 'banana')])
 
     # Test Caps and Errors
