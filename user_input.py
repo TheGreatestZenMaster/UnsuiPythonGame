@@ -1,8 +1,14 @@
+# unsui imports #
 from input_parser import Parser
+from send_data import invalid_input
+
+# lib imports #
 from lib.colorama import Fore
 
+# python imports #
 import sys
 
+# globals #
 default_input = raw_input
 
 def request_action(game,input=default_input):
@@ -29,7 +35,10 @@ def choose_object(item_list, input=default_input):
             item_list.remove(item)
             return item
     else:
-        print "can't find it!"
+        invalid_input("can't find it!",
+            input_string=grab_object,
+            tag='request to grab unknown object',
+            extra='avail_choices='+str(item_list)) 
         return None
         
 def opening_setup(game, input=default_input):
@@ -71,4 +80,6 @@ def help_info(input=default_input):
             if info_choice == "back":
                 return False
             else:
-                print "That's not a valid command! type 'back' to exit help."
+                invalid_input("That's not a valid command! type 'back' to exit help.",
+                    input_string=info_choice,
+                    tag='unknown help request') 

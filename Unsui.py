@@ -15,6 +15,7 @@ import sys
 #----- Unsui imports ------#
 import user_input
 from GameInstance import GameInstance
+from send_data import invalid_input
 
 #----- Library imports -----#
 import lib.colorama as colorama
@@ -53,7 +54,11 @@ def splash_screen():
             player_game = GameInstance()
             upper_main(player_game)
         else:
-            print "Please enter \"load\" or \"start\""
+            invalid_input("Please enter \"load\" or \"start\"",
+                input_string=input_string,
+                tag='bad load/save choice',
+                game=self) 
+            print 
 
 #------- Game Operation --------#
 if __name__ == '__main__':

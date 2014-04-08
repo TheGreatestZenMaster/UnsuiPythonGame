@@ -16,6 +16,7 @@ from input_parser import Parser
 from events.make_events import getEventList
 from quests.first_quest import first_quest
 from lib.colorama import Fore
+from send_data import invalid_input
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help", "quests"] # these are the actions which should always be available.
 
@@ -79,8 +80,10 @@ class GameInstance(object):
                     print self.player.current_location.description
                     
                 elif command.object.type == 'error':
-                    print "I don't understand %s" % command.object.name
-
+                    invalid_input("I don't understand %s" % command.object.name,
+                        input_string=command.raw,
+                        tag='unknown object error',
+                        game=self)
                 elif 'in' in command.object.prepositional_modifiers:
 
                     self.config_loader.get_by_type_and_name('item', command.object.name).look_in()
@@ -98,7 +101,10 @@ class GameInstance(object):
                             print 'Cannot go to '+Fore.GREEN+"{}".format(target_room.name)
                     except ValueError as err:
                         if err.message[0:16] == 'Cannot find room':
-                            print err.message
+                            invalid_input(err.message,
+                                input_string=command.raw,
+                                tag='room not found',
+                                game=self)
                         else:
                             raise
                 else:
@@ -110,9 +116,13 @@ class GameInstance(object):
                         try:
                             self.player.current_location = self.config_loader.get_by_type_and_name('room', travel_location)
                         except ValueError:
-                            print 'Place not recognized.'
+                            invalid_input('Place not recognized.',
+                                input_string=travel_location,
+                                tag='room specified not found',
+                                game=self)
                             
             if command.verb.name == 'stats':
+                print ' ### USER STATS ### '
                 self.player.player_status()
                 print ' ### GAME STATS ### '
                 print 'game started : ', self.GAME_START
@@ -138,4 +148,7 @@ class GameInstance(object):
 
             self.commands_entered += 1
         else:
-            print "Command not recognised."
+            invalid_input('Command not recognized.',
+                input_string=command.raw,
+                tag='unknown command',
+                game=self)

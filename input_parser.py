@@ -30,6 +30,7 @@ class Command(object):
 	def __init__(self, verb):
 		self.verb = verb
 		self.object = None
+		self.raw = None # raw sentence given to yield the command
 
 class Verb(object):
 	def __init__(self, name, type):
@@ -124,7 +125,9 @@ class Parser(object):
 
 	def parse(self, sentence):
 		"""Takes a sentence and returns a Command object"""
-		return self.classify(self.tokenise(sentence))
+		cmd = self.classify(self.tokenise(sentence))
+		cmd.raw = sentence
+		return cmd
 
 if __name__ == '__main__':
     for key,value in VOCABULARY.items():
