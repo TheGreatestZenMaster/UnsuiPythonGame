@@ -68,6 +68,8 @@ class GameInstance(object):
 
         # TODO:
         #   - Move this code to user_input maybe
+        #     ^ Any thoughts on this? This code will become very large as we implement more verbs.
+        #       Unless we can devise a smart way to handle them all.
 
 
         if command:

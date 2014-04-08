@@ -99,3 +99,13 @@ def parser_classify_test():
     assert_equal(command1.object.adjectival_modifiers, ['sturdy', 'big'])
 
     # Preposition Phrases (TODO)
+
+    sentence1 = parser.tokenise('look inside fridge')
+    command1 = parser.classify(sentence1)
+
+    assert_equal(command1.verb.name, 'look')
+    assert_equal(command1.verb.modifiers, [])
+    assert_equal(command1.object.name, 'fridge')
+    assert_equal(command1.object.type, 'prepositional_phrase')
+    assert_equal(command1.object.prepositional_modifiers, ['in'])
+    assert_equal(command1.object.adjectival_modifiers, [])

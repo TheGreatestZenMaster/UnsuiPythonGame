@@ -28,18 +28,18 @@ Indirect Objects:
 Unsure how I'll implement this one
 
 Adverbs:
-
+> I don't think they're really needed.
 
 """
 # I may move some of the strings around, e.g. moving the 'extra' ones to 'command'
 WORD_TYPES = {
     'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet', 'eat', 'shower'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
-    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'dressers', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana', 'shower'],
+    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'dressers', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana', 'shower', 'fridge'],
     'pronoun': ['me', 'you', 'him', 'her', 'it', 'them'],
     'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small', 'sturdy'],
     'adverb': [],
-    'preposition': ['on', 'under', 'from', 'to', 'behind', 'into', 'in'],
+    'preposition': ['on', 'under', 'from', 'to', 'behind', 'into', 'in', 'inside'],
     'article': ['a', 'an', 'the'],
     'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map', 'name', 'quests'],
     'extra': ['save', 'load', 'reset']
@@ -130,7 +130,11 @@ class Parser(object):
 							object.adjectival_modifiers.append(tokens[index][1])
 						if tokens[index][0] == 'preposition':
 							object.type = 'prepositional_phrase'
-							object.prepositional_modifiers.append(tokens[index][1])
+							if tokens[index][1] == 'inside':
+								# inside and in will be treated the same, as 'in'
+								object.prepositional_modifiers.append('in')
+							else:
+								object.prepositional_modifiers.append(tokens[index][1])
 
 						elif tokens[index][0] == 'verb':
 							break

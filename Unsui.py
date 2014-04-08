@@ -53,6 +53,22 @@ def splash_screen():
         if input_string == 'start' or input_string == 's':
             player_game = GameInstance()
             upper_main(player_game)
+
+        # Just so I can test stuff. (Joshua)
+        elif input_string == 'debug' or input_string == 'd':
+            player_game = GameInstance()
+            action_list = ['exit', 'look inside fridge', 'go kitchen', 'go hallway']
+            # ^ Anyone know how I can have this work without it being backwards? refers to action_list.pop() below
+      
+            user_input.opening_setup(player_game,lambda (x): 'Joshua')
+            counter = 1
+            while True:
+                command = player_game.parser.parse(action_list.pop()) # next command
+                print "%i: %s" % (counter, command.raw)
+                player_game.take_action(command)
+                player_game.check_events()
+                counter += 1
+
         else:
             invalid_input("Please enter \"load\" or \"start\"",
                 input_string=input_string,
