@@ -23,7 +23,7 @@ BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help", "quests"] # t
 DEFAULT_SAVE_FILE = 'unsui_default.save'
 
 class GameInstance(object):
-    def __init__(self, load=False):
+    def __init__(self, load=False, input_func=user_input.default_input):
         if load == False:
             # define attributes: #
             self.player = Player("NoName", "Male", "Human", None)           
@@ -36,7 +36,7 @@ class GameInstance(object):
             
             # call set up functions: #
             self.config_loader.generate()    
-            user_input.opening_setup(self)
+            user_input.opening_setup(self,input=input_func)
             self.events.append(first_quest(self))            
         else:
             self.load_game(load)

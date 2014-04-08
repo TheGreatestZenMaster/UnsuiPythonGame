@@ -22,8 +22,7 @@ class UI_tests(unittest.TestCase):
         '''
         runs through basic setup with random values to ensure it does not crash
         '''
-        game = GameInstance()
-        opening_setup(game,input=randomString)
+        game = GameInstance(input_func=randomString)
         
     
     def grab_object_test(self):
@@ -44,8 +43,7 @@ class UI_tests(unittest.TestCase):
         
     def base_help_test(self):
         '''tests out the help for all base actions'''
-        game = GameInstance()
-        opening_setup(game,input=randomString)
+        game = GameInstance(input_func=randomString)
         
         for action in BASE_ACTIONS:
             class pickAction(object):
@@ -65,8 +63,7 @@ class UI_tests(unittest.TestCase):
 
     def base_actions_test(self):
         ''' test to ensure that base actions don't crash '''
-        game = GameInstance()
-        opening_setup(game,input=randomString)
+        game = GameInstance(input_func=randomString)
         
         for action in BASE_ACTIONS:
             if action=="exit": # skip exit action (or else test breaks)

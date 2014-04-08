@@ -22,4 +22,4 @@ class doesItRun(unittest.TestCase):
 
     @raises(SystemExit)  # because of systemExit
     def exit_upper_main_test(self):
-        upper_main(player_game=GameInstance(), input=alwaysExit)
+        upper_main(player_game=GameInstance(input_func=alwaysExit),input=alwaysExit)
