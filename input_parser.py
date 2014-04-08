@@ -2,26 +2,58 @@
 # This module defines a parser which can parse a string into a Command object.
 # A command object consists of a verb instance and a object instance.
 # For now the objects are always the direct object of the verb.
-# The objects can have modifiers applied a.k.a adjectives
+# The objects and verbs can have modifiers applied a.k.a adjectives/adverbs
 
 
+"""
+Brainstorm:
+
+Export Vocab to another file
+
+Pronouns: 
+subject pronouns not needed since subject is always player
+object pronouns: me, you, him, her, it, them
+possessive pronouns: not really needed
+indefinite pronouns: all, both, each, either
+relative pronouns: that, which
+
+Adjectives:
+How to implement positive/comparative/superlative adjectives? 
+
+possessive adjectives: my, your, his, her, its, their
+^ should be easy to identify, they should appear before the noun they refer to.
+^^ But they're not really needed that much to be honest.
+
+Indirect Objects:
+Unsure how I'll implement this one
+
+Adverbs:
+
+
+"""
 # I may move some of the strings around, e.g. moving the 'extra' ones to 'command'
 WORD_TYPES = {
-    'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet', 'eat'],
+    'verb' : ['go', 'use', 'look', 'get', 'inspect', 'grab', 'check', 'talk', 'take', 'pick', 'listen', 'pet', 'eat', 'shower'],
     'direction' : ['north', 'south', 'east', 'west', 'up', 'down', 'left', 'right'],
-    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'dressers', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana'],
+    'noun': ['door', 'key', 'man', 'woman', 'bed', 'window', 'desk', 'dressers', 'hallway', 'kitchen', 'bedroom', 'cat', 'banana', 'shower'],
     'pronoun': ['me', 'you', 'him', 'her', 'it', 'them'],
     'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small', 'sturdy'],
     'adverb': [],
     'preposition': ['on', 'under', 'from', 'to', 'behind', 'into', 'in'],
-    'stop': ['the', 'of'],
     'article': ['a', 'an', 'the'],
     'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map', 'name', 'quests'],
     'extra': ['save', 'load', 'reset']
 }
 
 # This creates a dictionary of (word, type)
-VOCABULARY = {word: word_type for word_type, words in WORD_TYPES.items() for word in words}
+#VOCABULARY = {word: word_type for word_type, words in WORD_TYPES.items() for word in words}
+VOCABULARY = {}
+for word_type in WORD_TYPES:
+	for word in WORD_TYPES[word_type]:
+		try:
+			VOCABULARY[word].append(word_type)
+		except:
+			VOCABULARY[word] = [word_type]
 
 class Command(object):
 	"""This class is what is returned by Parser.parse()
@@ -48,9 +80,6 @@ class Object(object):
 class Parser(object):
 	"""
 	The main method which is needed is the Parser.parse() method.
-
-	TODO:
-		- Support prepositions
 	"""
 	def preprocess(self, sentence):
 		"""Returns sentence in lowercase."""
@@ -61,7 +90,7 @@ class Parser(object):
 		tokens = []
 		for word in sentence.split():
 			try:
-				word_type = VOCABULARY[word]
+				word_type = VOCABULARY[word][0]
 			except KeyError:
 				try:
 					value = int(word)
@@ -107,7 +136,6 @@ class Parser(object):
 							break
 						index = index - 1
 
-
 				elif token[0] == 'error':
 					command.object = Object(token[1], 'error')
 
@@ -128,7 +156,9 @@ class Parser(object):
 		cmd = self.classify(self.tokenise(sentence))
 		cmd.raw = sentence
 		return cmd
+		return self.classify(self.tokenise(sentence))
+
 
 if __name__ == '__main__':
     for key,value in VOCABULARY.items():
-    	print key + ": " + value
+    	print key + ": ", value
