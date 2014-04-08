@@ -56,8 +56,7 @@ def splash_screen():
         else:
             invalid_input("Please enter \"load\" or \"start\"",
                 input_string=input_string,
-                tag='bad load/save choice',
-                game=self) 
+                tag='bad load/save choice') 
             print 
 
 #------- Game Operation --------#
