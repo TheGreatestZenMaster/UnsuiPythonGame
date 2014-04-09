@@ -60,10 +60,14 @@ class Command(object):
 	"""This class is what is returned by Parser.parse()
 	and for the moment consists of a verb and a direct object if it exists.
 	"""
-	def __init__(self, verb):
+	def __init__(self, verb=None, object=None):
 		self.verb = verb
-		self.object = None
+		self.object = object
 		self.raw = None # raw sentence given to yield the command
+
+	def __nonzero__(self):
+		''' boolean usage evaluates to true if verb undefined '''
+		return self.verb!=None
 
 class Verb(object):
 	def __init__(self, name, type):
@@ -113,7 +117,7 @@ class Parser(object):
 
 	def classify(self, tokens):
 		"""Creates the Command object and applies modifiers to objects."""
-		command = False
+		command = Command()
 		if tokens == []:
 			return command
 		if tokens[0][0] == 'verb':
