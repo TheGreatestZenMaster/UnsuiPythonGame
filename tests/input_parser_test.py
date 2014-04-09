@@ -98,7 +98,7 @@ def parser_classify_test():
     assert_equal(command1.object.prepositional_modifiers, ['under'])
     assert_equal(command1.object.adjectival_modifiers, ['sturdy', 'big'])
 
-    # Preposition Phrases (TODO)
+    # Prepositional Phrases (TODO)
 
     sentence1 = parser.tokenise('look inside fridge')
     command1 = parser.classify(sentence1)

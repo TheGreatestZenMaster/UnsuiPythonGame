@@ -148,6 +148,9 @@ class GameInstance(object):
             if command.verb.name == 'name':
                 print self.player.name
 
+            else:
+                print "I'm not sure what you mean."
+
             self.commands_entered += 1
         else:
             invalid_input('Command not recognized.',

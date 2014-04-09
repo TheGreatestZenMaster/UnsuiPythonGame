@@ -57,7 +57,7 @@ def splash_screen():
         # Just so I can test stuff. (Joshua)
         elif input_string == 'debug' or input_string == 'd':
             player_game = GameInstance()
-            action_list = ['exit', 'look inside fridge', 'go kitchen', 'go hallway']
+            action_list = ['exit', 'take eggs from fridge', 'look inside fridge', 'go kitchen', 'go hallway']
             # ^ Anyone know how I can have this work without it being backwards? refers to action_list.pop() below
       
             user_input.opening_setup(player_game,lambda (x): 'Joshua')

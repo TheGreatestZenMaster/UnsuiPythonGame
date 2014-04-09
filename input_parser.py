@@ -15,7 +15,8 @@ subject pronouns not needed since subject is always player
 object pronouns: me, you, him, her, it, them
 possessive pronouns: not really needed
 indefinite pronouns: all, both, each, either
-relative pronouns: that, which
+demonstrative pronouns:
+relative pronouns: that, which -> relative clauses?
 
 Adjectives:
 How to implement positive/comparative/superlative adjectives? 
@@ -25,7 +26,7 @@ possessive adjectives: my, your, his, her, its, their
 ^^ But they're not really needed that much to be honest.
 
 Indirect Objects:
-Unsure how I'll implement this one
+Unsure how I'll implement this one. Maybe by specific verbs that indicate a possible indirect object.
 
 Adverbs:
 > I don't think they're really needed.
