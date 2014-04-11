@@ -3,7 +3,7 @@
 import unittest
 import random
 
-from ..send_data import *
+from send_data import *
 
 class basic_tests(unittest.TestCase):
 
