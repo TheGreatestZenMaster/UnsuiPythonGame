@@ -41,7 +41,7 @@ WORD_TYPES = {
     'adjective': ['red', 'blue', 'green', 'black', 'white', 'big', 'small', 'sturdy'],
     'adverb': [],
     'preposition': ['on', 'under', 'from', 'to', 'behind', 'into', 'in', 'inside'],
-    'article': ['a', 'an', 'the'],
+    'determiner': ['a', 'an', 'the'],
     'command': ['status', 'stats', 'location', 'help', 'exit', 'inventory', 'bag', 'map', 'name', 'quests'],
     'extra': ['save', 'load', 'reset']
 }
@@ -90,6 +90,14 @@ class Parser(object):
 		"""Returns sentence in lowercase."""
 		return sentence.lower()
 
+	def clean(self, tokens):
+		"""Removes articles from the token list"""
+		clean_tokens = tokens
+		for token in clean_tokens:
+			if token == ('article', 'an') or token == ('article', 'a'):
+				clean_tokens.remove(token)
+		return clean_tokens
+
 	def scan(self, sentence):
 		"""Tokenises sentence returning a list of the words and their types"""
 		tokens = []
@@ -107,13 +115,13 @@ class Parser(object):
 				tokens.append( (word_type, word))
 		return tokens
 		
-	def clean(self, tokens):
-		"""Removes articles from the token list"""
-		clean_tokens = tokens
-		for token in clean_tokens:
-			if token == ('article', 'an') or token == ('article', 'a'):
-				clean_tokens.remove(token)
-		return clean_tokens
+	def tokenise(self, sentence):
+		"""Returns a list of clean tokens"""
+		output = self.preprocess(sentence)
+		output = self.scan(output)
+		#output = self.clean(output)
+		# I've decided to leave articles in from now on, I think they may be important
+		return output
 
 	def classify(self, tokens):
 		"""Creates the Command object and applies modifiers to objects."""
@@ -152,13 +160,6 @@ class Parser(object):
 			command = Command(Verb(tokens[0][1], 'command'))
 
 		return command
-
-	def tokenise(self, sentence):
-		"""Returns a list of clean tokens"""
-		output = self.preprocess(sentence)
-		output = self.scan(output)
-		output = self.clean(output)
-		return output
 
 	def parse(self, sentence):
 		"""Takes a sentence and returns a Command object"""
