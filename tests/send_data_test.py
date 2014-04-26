@@ -3,7 +3,11 @@
 import unittest
 import random
 
+<<<<<<< HEAD
 #from UnsuiPythonGame.send_data import *
+=======
+from send_data import *
+>>>>>>> 584ddcf342f5db5e30803b06ca422ccb529ba393
 
 class basic_tests(unittest.TestCase):
 
