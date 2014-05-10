@@ -14,8 +14,8 @@ from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
 from input_parser import Parser
-from events.make_events import getEventList
-from quests.first_quest import first_quest
+from eventsEngine.EventsEngine import EventsEngine
+from gamedata.getEventList import getStartingEvents
 from lib.colorama import Fore
 from send_data import invalid_input
 
@@ -32,12 +32,11 @@ class GameInstance(object):
             self.GAME_START = datetime.now()
             self.commands_entered = 0
             self.actions_available = BASE_ACTIONS
-            self.events = getEventList(self)
-            
+                        
             # call set up functions: #
             self.config_loader.generate()    
             user_input.opening_setup(self,input=input_func)
-            self.events.append(first_quest(self))            
+            self.events_engine = EventsEngine.EventsEngine(getStartingEvents(self))
         else:
             self.load_game(load)
 
@@ -49,12 +48,9 @@ class GameInstance(object):
     def check_events(self):
         '''
         Checks all events in the event list to see 
-        if they have been triggered. If so, performs event action
-        and removes event from the list.
+        if they have been triggered.
         '''
-        for event in self.events:
-            if event.check():
-                self.events.remove(event)
+        self.events_engine.checkEvents()
                 
     def load_game(self,fname):
         with open(fname, 'rb') as f:
