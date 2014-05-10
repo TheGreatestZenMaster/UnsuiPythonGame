@@ -3,7 +3,7 @@ from input_parser import Parser
 from send_data import invalid_input
 
 # lib imports #
-from lib.colorama import Fore
+from lib.colorama.colorama import Fore
 
 # python imports #
 import sys

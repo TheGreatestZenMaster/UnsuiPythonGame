@@ -1,5 +1,5 @@
 # should print immediately to demonstrate usage.
-from lib.eventsEngine.EventsEngine import Story, Event, Action, Trigger
+from lib.eventsEngine.EventsEngine.EventsEngine import Story, Event, Action, Trigger
 
 
 def get_event(game):

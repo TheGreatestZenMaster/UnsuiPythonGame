@@ -1,0 +1,12 @@
+[submodule "EventsEngine"]
+	path = EventsEngine
+	url = https://github.com/7yl4r/EventsEngine
+[submodule "lib"]
+	path = lib
+	url = https://github.com/7yl4r/EventsEngine
+[submodule "lib/eventsEngine"]
+	path = lib/eventsEngine
+	url = https://github.com/7yl4r/EventsEngine
+[submodule "lib/colorama"]
+	path = lib/colorama
+	url = https://github.com/tartley/colorama

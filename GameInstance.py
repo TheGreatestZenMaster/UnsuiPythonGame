@@ -17,7 +17,7 @@ from input_parser import Parser
 from gamedata.getEventList import getStartingEvents
 from send_data import invalid_input
 from lib.eventsEngine.EventsEngine import EventsEngine
-from lib.colorama import Fore
+from lib.colorama.colorama import Fore
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help", "quests"] # these are the actions which should always be available.
 DEFAULT_SAVE_FILE = 'unsui_default.save'

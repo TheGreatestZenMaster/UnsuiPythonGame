@@ -1,6 +1,6 @@
 
 import urllib, urllib2
-from lib.colorama import Fore
+from lib.colorama.colorama import Fore
 
 from threading import Thread
 

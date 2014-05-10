@@ -18,7 +18,7 @@ from GameInstance import GameInstance, DEFAULT_SAVE_FILE
 from send_data import invalid_input
 
 #----- Library imports -----#
-import lib.colorama as colorama
+import lib.colorama.colorama as colorama
 
 colorama.init(autoreset=True)
 

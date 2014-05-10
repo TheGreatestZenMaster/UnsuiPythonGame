@@ -1,5 +1,5 @@
 # tells user 'grats' for 1st level up
-from lib.eventsEngine.EventsEngine import Event, Action, Trigger
+from lib.eventsEngine.EventsEngine.EventsEngine import Event, Action, Trigger
 
 
 def get_event(game):
