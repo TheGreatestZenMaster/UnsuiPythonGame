@@ -15,14 +15,9 @@ from config import UnsuiConfigLoader
 import user_input
 from input_parser import Parser
 from gamedata.getEventList import getStartingEvents
-from lib.colorama import Fore
 from send_data import invalid_input
-try:
-    from lib.eventsEngine.EventsEngine import EventsEngine
-except ImportError as er:
-    er.message += ' Required lib "EventsEngine" is missing. Install to lib dir using `git clone https://github.com/7yl4r/EventsEngine UnsuiPythonGame/lib/`'
-    raise er
-
+from lib.eventsEngine.EventsEngine import EventsEngine
+from lib.colorama import Fore
 
 BASE_ACTIONS = ["look", "go", "location", "stats", "exit", "help", "quests"] # these are the actions which should always be available.
 DEFAULT_SAVE_FILE = 'unsui_default.save'
