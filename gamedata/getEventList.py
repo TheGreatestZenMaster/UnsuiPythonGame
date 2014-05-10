@@ -6,6 +6,7 @@ import pkgutil
 import events.initial
 import stories.initial
 
+
 def getStartingEvents(game):
     ''' return list of all initial events and stories '''
     from .events.initial import *

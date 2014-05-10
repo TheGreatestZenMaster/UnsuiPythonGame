@@ -6,11 +6,7 @@ import sys
 from datetime import datetime
 import pickle
 
-from items.Key import Key
-from items.Door import Door
-from rooms.Room import Room
 from Player.Player import Player
-from monsters.Wolf import Wolf
 from config import UnsuiConfigLoader
 import user_input
 from input_parser import Parser
@@ -70,8 +66,7 @@ class GameInstance(object):
         self.commands_entered = game.commands_entered
         self.actions_available = game.actions_available
         self.events = game.events
-        
-                
+
     def save_game(self,fname=DEFAULT_SAVE_FILE):
         with open(fname,'wb') as f:
             pickle.dump(self,f,pickle.HIGHEST_PROTOCOL)
@@ -92,7 +87,6 @@ class GameInstance(object):
         #   - Move this code to user_input maybe
         #     ^ Any thoughts on this? This code will become very large as we implement more verbs.
         #       Unless we can devise a smart way to handle them all.
-
 
         if command:
             if command.verb.name == 'exit':

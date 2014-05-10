@@ -6,12 +6,6 @@
 #    \___/|_| |_|___/\__,_|_|
 
 
-#----- Base Python imports ------#
-
-#----- Set path to library ------#
-import os
-import sys
-
 #----- Unsui imports ------#
 import user_input
 from GameInstance import GameInstance, DEFAULT_SAVE_FILE
@@ -35,7 +29,8 @@ def upper_main(player_game, input=raw_input):
             command = player_game.parser.parse(user_action)
             player_game.take_action(command)
             player_game.check_events()
-            
+
+
 def splash_screen():
     '''
     display a simple splash screen which asks user to load/start game.
@@ -73,5 +68,3 @@ def splash_screen():
 #------- Game Operation --------#
 if __name__ == '__main__':
     splash_screen()
-
-    

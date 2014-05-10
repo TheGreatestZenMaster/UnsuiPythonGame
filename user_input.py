@@ -5,11 +5,9 @@ from send_data import invalid_input
 # lib imports #
 from lib.colorama.colorama import Fore
 
-# python imports #
-import sys
-
 # globals #
 default_input = raw_input
+
 
 def request_action(game,input=default_input):
     '''
@@ -40,7 +38,8 @@ def choose_object(item_list, input=default_input):
             tag='request to grab unknown object',
             extra='avail_choices='+str(item_list)) 
         return None
-        
+
+
 def opening_setup(game, input=default_input):
     """This opening setup gives us a player name and also provides the opening text"""
     name = input("Whats your name?")
@@ -54,6 +53,7 @@ def opening_setup(game, input=default_input):
     print opening_text
     game.player.level_up() 
 
+
 def get_events_list(game):
         '''
         Prints out the list of current initiated events
@@ -62,6 +62,7 @@ def get_events_list(game):
         for event in game.events:
             if event.initiated and not event.completed:
                 print(event.get_event_name())
+
 
 #------Help function ------#
 def help_info(input=default_input):

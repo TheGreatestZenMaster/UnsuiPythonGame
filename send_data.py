@@ -6,6 +6,7 @@ from threading import Thread
 
 UNSUI_VERSION = '0.1'   #TODO: I think there is a better place to keep this, but right now it isn't really used
 
+
 def invalid_input(response, input_string='_', tag='_', game=None, extra='_'):
     '''
     this function should be used to tell the user when they have
@@ -36,6 +37,7 @@ def invalid_input(response, input_string='_', tag='_', game=None, extra='_'):
         
     send_invalid_input(playerName, input_string, loc, tag, cmd_count, extra)
 
+
 def send_invalid_input(user_name, input_string, user_location, tag, command_count, extra):
     '''
     sends invalid input from user and user context information 
@@ -63,4 +65,3 @@ def send_invalid_input(user_name, input_string, user_location, tag, command_coun
         result = response.read()
     
     Thread(target=sendIt, args=(url,data,header)).start()
-    
