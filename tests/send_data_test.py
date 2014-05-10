@@ -3,7 +3,11 @@
 import unittest
 import random
 
+<<<<<<< HEAD
+#from UnsuiPythonGame.send_data import *
+=======
 from send_data import *
+>>>>>>> 584ddcf342f5db5e30803b06ca422ccb529ba393
 
 class basic_tests(unittest.TestCase):
 
@@ -20,4 +24,4 @@ class basic_tests(unittest.TestCase):
             ]
             
         # the actual test:
-        send_invalid_input('_tester_','tst str',random.choice(silly_locations),'unittest','-1','t'+str(['e']*random.randrange(7))+'st')
+        #send_invalid_input('_tester_','tst str',random.choice(silly_locations),'unittest','-1','t'+str(['e']*random.randrange(7))+'st')

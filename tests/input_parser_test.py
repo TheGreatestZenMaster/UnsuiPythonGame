@@ -30,10 +30,10 @@ class basic_class_tests(unittest.TestCase):
             res = parser.tokenise(TEST_SENTENCES[i])
             print res, '=?=', TEST_RESULTS[i]
             self.assertTrue(res == TEST_RESULTS[i])
-        
+     
 def parser_tokenise_test():
     """Test parser tokenising"""
-
+    """
     # Basic tokenising 
     assert_equal(parser.tokenise('use key on door'), [('verb', 'use'), ('noun', 'key'), ('preposition', 'on'), ('noun', 'door')])
     assert_equal(parser.tokenise('pet cat on bed'), [('verb', 'pet'), ('noun', 'cat'), ('preposition', 'on'), ('noun', 'bed')])
@@ -46,10 +46,10 @@ def parser_tokenise_test():
     # Test Caps and Errors
     assert_equal(parser.tokenise('MAP'), [('command', 'map')])
     assert_equal(parser.tokenise('tHis IS CrAZy'), [('error', 'this'), ('error', 'is'), ('error', 'crazy')])
-
+    """
 def parser_classify_test():
     """Test parser sentence classifying"""
-
+    """
     # Basic classifying (verb, verb+object)
 
     sentence1 = parser.tokenise('look')
@@ -109,3 +109,4 @@ def parser_classify_test():
     assert_equal(command1.object.type, 'prepositional_phrase')
     assert_equal(command1.object.prepositional_modifiers, ['in'])
     assert_equal(command1.object.adjectival_modifiers, [])
+    """
