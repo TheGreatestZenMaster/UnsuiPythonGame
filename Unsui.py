@@ -11,10 +11,13 @@ import user_input
 from GameInstance import GameInstance, DEFAULT_SAVE_FILE
 from send_data import invalid_input
 
-#----- Library imports -----#
-import lib.colorama.colorama as colorama
+# import colorama if in terminal
+import sys
+if sys.stdout == sys.__stdout__:
+    #----- Library imports -----#
+    import lib.colorama.colorama as colorama
 
-colorama.init(autoreset=True)
+    colorama.init(autoreset=True)
 
 
 def upper_main(player_game, input=raw_input):
